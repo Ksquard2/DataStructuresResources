@@ -1,17 +1,21 @@
 #include <iostream>
 #include <string>
 using namespace std;
-class String{
+class String
+{
 public:
   char arr[15];
   int length;
-  String(){
-    for(int i = 0;i < 30;i++){
+  String()
+  {
+    for(int i = 0;i < 30;i++)
+    {
       arr[i] = ' ';
     }
     length = 0;
   }
-  String(string str){
+  String(string str)
+  {
     
     for(int i = 0;i <str.length(); i++ )
     {
@@ -63,7 +67,8 @@ public:
     }
     cout<<endl;
   }
-  int Pos(char c){
+  int Pos(char c)
+  {
     for(int i = 0; i < length; i++){
       if(arr[i] == c){
         return i;
@@ -71,15 +76,18 @@ public:
     }
     return -1;
   }
-  char getChar(int i){
-    if(arr[i] == ' '){
+  char getChar(int i)
+  {
+    if(arr[i] == ' ')
+    {
       return '/';
     }
     else return arr[i];
   }
   void insertAt(int i,char c)
   {
-    if(!isFull()){
+    if(!isFull())
+    {
       if(i > length-1)
       {
         cout<<"String too small"<<endl;
@@ -100,7 +108,8 @@ public:
   void deleteAll(char c)
   {
     if(isEmpty()) cout<<"String is empty"<<endl;
-    else {
+    else 
+    {
       for(int i = 0; i < length; i++)
         {
           while(arr[i] == c)

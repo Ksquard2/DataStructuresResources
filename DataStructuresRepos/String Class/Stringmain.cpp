@@ -3,19 +3,24 @@
 #include <string>
 using namespace std;
 
-bool isEqual(String s, string str){
-  if(str.length() != s.len()){
+bool isEqual(String s, string str)
+{
+  if(str.length() != s.len())
+  {
     return false;
   }
-  for(int i  = 0;i < str.length(); i++){
-    if(s.arr[i] != str[i]){
+  for(int i  = 0;i < str.length(); i++)
+  {
+    if(s.arr[i] != str[i])
+    {
       return false;
     }
   }
   return true;
 }
 
-void unitTestDeleteAll1(){
+void unitTestDeleteAll1()
+{
   String s("Hello");
   s.deleteAll('l');
   if(isEqual(s,"Heo")){
@@ -23,7 +28,8 @@ void unitTestDeleteAll1(){
   }
   else cout<< "Test 1 Failed" << endl;
 }
-void unitTestDeleteAll2(){
+void unitTestDeleteAll2()
+{
   String s("Hello");
   s.deleteAll('v');
   if(isEqual(s,"Hello")){
@@ -31,7 +37,8 @@ void unitTestDeleteAll2(){
   }
   else cout<< "Test 2 Failed" << endl;
 }
-void unitTestInsertAt1(){
+void unitTestInsertAt1()
+{
   String s("Hllo");
   s.insertAt(1, 'e');
   if(isEqual(s,"Hello")){
@@ -39,7 +46,8 @@ void unitTestInsertAt1(){
   }
   else cout<< "Test 3 Failed" << endl;
 }
-void unitTestInsertAt2(){
+void unitTestInsertAt2()
+{
   String s("Hello");
   s.insertAt(9, 'e');
   if(isEqual(s,"Hello")){
@@ -50,12 +58,14 @@ void unitTestInsertAt2(){
 void unitTestInsertAt3(){
   String s("123456789012345");
   s.insertAt(9, 'e');
-  if(isEqual(s,"123456789012345")){
+  if(isEqual(s,"123456789012345"))
+  {
     cout<< "Test 5 Passed" << endl;
   }
   else cout<< "Test 5 Failed" << endl;
 }
-void unitTestDeleteAt1(){
+void unitTestDeleteAt1()
+{
   String s("Hello");
   s.deleteAt(4);
   if(isEqual(s,"Hell")){
@@ -63,7 +73,8 @@ void unitTestDeleteAt1(){
   }
   else cout<< "Test 6 Failed" << endl;
 }
-void unitTestDeleteAt2(){
+void unitTestDeleteAt2()
+{
   String s("Hello");
   s.deleteAt(9);
   if(isEqual(s,"Hello")){
@@ -71,7 +82,8 @@ void unitTestDeleteAt2(){
   }
   else cout<< "Test 7 Failed" << endl;
 }
-void unitTestDeleteAt3(){
+void unitTestDeleteAt3()
+{
   String s;
   s.deleteAt('l');
   if(s.isEmpty()){
@@ -79,7 +91,8 @@ void unitTestDeleteAt3(){
   }
   else cout<< "Test 10 Failed" << endl;
 }
-void unitTestAppend1(){
+void unitTestAppend1()
+{
   String s("Hell");
   s.append('o');
   if(isEqual(s,"Hello")){
@@ -87,7 +100,8 @@ void unitTestAppend1(){
   }
   else cout<< "Test 8 Failed" << endl;
 }
-void unitTestAppend2(){
+void unitTestAppend2()
+{
   String s("123456789012345");
   s.append('e');
   if(isEqual(s,"123456789012345")){
@@ -95,21 +109,24 @@ void unitTestAppend2(){
   }
   else cout<< "Test 9 Failed" << endl;
 }
-void uniteTestFull(){
+void uniteTestFull()
+{
   String s("123456789012345");
   if(s.isFull()){
     cout<< "Test 11 Passed" << endl;
   }
   else cout<< "Test 11 Failed" << endl;
 }
-void unitTestEmpty(){
+void unitTestEmpty()
+{
   String s;
   if(s.isEmpty()){
     cout<< "Test 12 Passed" << endl;
   }
   else cout<< "Test 12 Failed" << endl;
 }
-void unitTestDeleteAll3(){
+void unitTestDeleteAll3()
+{
   String s;
   s.deleteAll('l');
   if(s.isEmpty()){
@@ -117,7 +134,8 @@ void unitTestDeleteAll3(){
   }
   else cout<< "Test 13 Failed" << endl;
 }
-void testAll(){
+void testAll()
+{
   unitTestDeleteAll1();
   unitTestDeleteAll2();
   unitTestInsertAt1();
