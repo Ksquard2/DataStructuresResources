@@ -4,42 +4,46 @@
 #include <map>
 using namespace std;
 
-class town{
-  public:
-  string name;
-  int pop;
-  string mayor;
-  town();
+class town {
+public:
+    string name;
+    int pop;
+    string mayor;
 
-  town(string n, int p, string m){
-    name = n;
-    pop=p;
-    mayor = m;
-  }
-  int operator+(const town& t){
-    return pop + t.pop;
-  }
-  ostream& operator<<(ostream& out){
-    out << name;
-    return out;
-  }
-  void printClass(){
-    cout<<" is the mayor of "<<name<<" with a population of "<<pop;
-  }
+    town() {}
+
+    town(string n, int p, string m) : name(n), pop(p), mayor(m) {}
+
+    int operator+(const town& t) {
+        return pop + t.pop;
+    }
+
+    friend ostream& operator<<(ostream& out, const town& t) {
+        out << t.name;
+        return out;
+    }
+
+    void printClass() {
+        cout << mayor << " is the mayor of " << name << " with a population of " << pop << endl;
+    }
 };
-int main() 
-{
 
-  town t = town("mainstreet", 30,"ahmed");
-  town a = town("peepstreet", 20,"bamed");
-  town b = town("meatstreet", 20,"locmed");
-  town meep[3] = {t,a,b};
-  map<string,town> myMap;
-  string arr[3] = {"mainstreet","peepstreet","meatstreet"};
-  myMap[t.name] = t;
-  myMap[a.name] = a;
-  myMap[b.name] = b;
-  myMap[arr[0]].printClass();
+int main() {
+    town t("mainstreet", 30, "ahmed");
+    town a("peepstreet", 20, "bamed");
+    town b("meatstreet", 20, "locmed");
+
+    map<string, town> myMap;
+    myMap[t.name] = t;
+    myMap[a.name] = a;
+    myMap[b.name] = b;
+
+    // Outputting town object directly using overloaded operator
+
+    // Using the printClass method
+    myMap["mainstreet"].printClass();  // Outputs: is the mayor of mainstreet with a population of 30
+
+
   // for(int i = 0;i < 3;i++)
   // {
   //   myMap[arr[i]].printClass();
