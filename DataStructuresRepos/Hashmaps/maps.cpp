@@ -38,11 +38,12 @@ int main() {
     myMap[a.name] = a;
     myMap[b.name] = b;
 
-    // Outputting town object directly using overloaded operator
+
 
     // Using the printClass method
     myMap["mainstreet"].printClass();  // Outputs: is the mayor of mainstreet with a population of 30
-
+    myMap["peepstreet"].printClass(); 
+    myMap["meatstreet"].printClass(); 
 
   // for(int i = 0;i < 3;i++)
   // {
