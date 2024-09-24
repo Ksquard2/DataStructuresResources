@@ -10,7 +10,8 @@ class MaxHeap
     int capacity;
     int start;
     
-    bool IsEmpty(){
+    bool IsEmpty()
+    {
       return size == 1;
     }
     bool IsFull()
@@ -24,7 +25,8 @@ class MaxHeap
       capacity = cap;
       arr = new int[cap];
     }
-    int* getArray(){
+    int* getArray()
+    {
       return arr;
     }
     void PercolateUp(int last)

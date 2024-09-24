@@ -73,12 +73,13 @@ public:
 
 void insertAtHelper(NodeI* node, int data, int pos)
 {
-  if(pos == 0){
+  if(pos == 0)
+  {
     node->data = data;
    
   }
-  else if(pos == 1){
-    
+  else if(pos == 1)
+  {
     NodeI* newNode = new NodeI(data);
     newNode->next = node->next;
     node->next = newNode;
@@ -136,7 +137,8 @@ void DeleteVal(int val)
         curr->next = nullptr;
         length--;
       }
-      else{
+      else
+      {
         cout<<"Not in the list"<<endl;
       }
     }
@@ -163,7 +165,8 @@ void DeleteAt(int pos)
       curr = curr->next;
       pos--;
     }
-    if(curr->next == NULL){
+    if(curr->next == NULL)
+    {
       prev->next = NULL;
     }
     else
@@ -181,7 +184,8 @@ int elementAt(int i)
     return -1;
   }
   NodeI* temp = this;
-  while(temp != NULL && i > 0){
+  while(temp != NULL && i > 0)
+  {
     temp = temp->next;
     i--;
   }
@@ -192,12 +196,15 @@ int elementAt(int i)
 
 bool IsIn(int d)
 {
-  if(isEmpty()){
+  if(isEmpty())
+  {
     return false;
   }
   NodeI* temp = this;
-  while(temp->next != NULL){
-    if(temp->data == d) {
+  while(temp->next != NULL)
+  {
+    if(temp->data == d) 
+    {
       cout<<temp->data<<endl;
       return true;
     }

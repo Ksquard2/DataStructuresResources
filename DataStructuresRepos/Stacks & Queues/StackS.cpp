@@ -28,14 +28,16 @@ class Stack
       {
         stack[TOS] = i;
         TOS++;
-      } else 
+      } 
+      else 
       {
         cout << "Stak is full.  Push ignored.";
       }
     }
     string pop()
     {
-      if(this->isSEmpty()){
+      if(this->isSEmpty())
+      {
         cout<<"Stack is empty"<<endl;
         return "-1";
       }
@@ -80,6 +82,4 @@ class Stack
         cout<<stack[i]<<endl;
       }
     }
-
-  
 };

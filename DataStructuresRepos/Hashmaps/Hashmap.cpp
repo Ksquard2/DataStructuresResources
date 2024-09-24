@@ -34,13 +34,13 @@ class Hashtable {
       return true;
     }
 
-    int hashFunction(int key){
+    int hashFunction(int key)
+    {
       return key % hashGroups;
     }
     void insertItem(int key, string name)
     {
       int hashValue = hashFunction(key);
-      // cout<<hashValue<<endl;
       NodePair *ptr = new NodePair(key, name);
       
       if(table[hashValue] == nullptr)
@@ -68,32 +68,35 @@ class Hashtable {
         table[hashValue] = temp->next;
         delete temp;
       }
-      else{
-        while(temp != nullptr && temp->key != key){
+      else
+      {
+        while(temp != nullptr && temp->key != key)
+        {
           prev = temp;
           temp = temp->next;
         }
-        }
       }
-      string searchItem(int key)
+    }
+    string searchItem(int key)
+    {
+      int hashValue = hashFunction(key);
+      NodePair *temp = table[hashValue];
+      if(temp == nullptr)
       {
-        int hashValue = hashFunction(key);
-        NodePair *temp = table[hashValue];
-        if(temp == nullptr){
-          return "Not Found";
-        }
-        else
+        return "Not Found";
+      }
+      else
+      {
+        while(temp != nullptr)
         {
-          while(temp != nullptr)
+          if(temp->key == key)
           {
-            if(temp->key == key)
-            {
-              return temp->val;
-            }
+            return temp->val;
           }
         }
-        return "";
       }
+        return "";
+    }
     void printTable()
     {
      

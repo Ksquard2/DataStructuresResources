@@ -9,20 +9,15 @@ public:
     string name;
     int pop;
     string mayor;
-
     town() {}
-
     town(string n, int p, string m) : name(n), pop(p), mayor(m) {}
-
     int operator+(const town& t) {
         return pop + t.pop;
     }
-
     friend ostream& operator<<(ostream& out, const town& t) {
         out << t.name;
         return out;
     }
-
     void printClass() {
         cout << mayor << " is the mayor of " << name << " with a population of " << pop << endl;
     }
@@ -37,8 +32,6 @@ int main() {
     myMap[t.name] = t;
     myMap[a.name] = a;
     myMap[b.name] = b;
-
-
 
     // Using the printClass method
     myMap["mainstreet"].printClass();  // Outputs: is the mayor of mainstreet with a population of 30
@@ -83,13 +76,5 @@ int main() {
   //   cin>>number;
   //   teams.insert(pair<string, string>(name,number));
   // }
-  // string curr;
-  // Hashtable ht;
-  // ht.insertItem(905, "Sophie");
-  // ht.insertItem(603, "George");
-  // ht.insertItem(802, "Corry");
-  // ht.insertItem(105, "David");
-
-  // ht.printTable();
   // return 0;
 };

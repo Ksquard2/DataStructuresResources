@@ -13,19 +13,22 @@ public:
   int size = 0;
 
   // Default constructor
-  NodePair() {
+  NodePair() 
+  {
     val = "";
     key = 0;
     next = NULL;
   }
 
   // Parameterised Constructor
-  NodePair(int I, string S) {
+  NodePair(int I, string S) 
+  {
     val = S;
     key = I;
     next = NULL;
   }
-  NodePair(NodePair *n) {
+  NodePair(NodePair *n) 
+  {
     key = n->key;
     val = n->val;
     next = NULL;

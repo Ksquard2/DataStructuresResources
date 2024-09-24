@@ -3,7 +3,8 @@ using namespace std;
 
 class DLLQueue{
 public:
-  struct DLLQ{
+  struct DLLQ
+  {
     int val;
     DLLQ* prev;
     DLLQ* next;
@@ -23,7 +24,8 @@ public:
     return Rear == NULL && Front == NULL;
   }
   
-  void Enqueue(int i){
+  void Enqueue(int i)
+  {
     DLLQ* curr = new DLLQ();
     curr->val = i;
     if(isEmpty())
@@ -39,10 +41,12 @@ public:
     }
     Q_size++;
   }
-  int size(){
+  int size()
+  {
     return Q_size;
   }
-  void print(){
+  void print()
+  {
     DLLQ* Marker = Front;
     while(Marker != NULL)
     {
@@ -51,7 +55,8 @@ public:
     }
     cout<<endl;
   }
-  int Deque(){
+  int Deque()
+  {
     if(isEmpty()){
       return -1;
     }

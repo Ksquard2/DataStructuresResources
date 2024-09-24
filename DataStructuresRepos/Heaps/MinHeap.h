@@ -45,7 +45,8 @@ void PercolateUp(int last){
       
     }
 }
-void setSize(){
+void setSize()
+{
   int i = capacity-1;
   while(arr[i] == 0)
   {
@@ -53,57 +54,57 @@ void setSize(){
   }
   size = i;
 }
-    void insert(int x)
+void insert(int x)
+{
+  setSize();
+  if(arr[1] == 0){
+    arr[1] = x;
+  
+  }
+  else
+  {
+    this->getArray()[size+1] = x;
+    PercolateUp(size);
+  }
+  setSize();
+}
+
+void PercolateDown(int start_index)
+// use “compare-and-replace” approach
+{
+  int i = start_index;
+  bool done = false;
+  while(!done && i*2 < capacity){
+    if(arr[i*2] == 0){
+      done = true;
+    }
+    else if(arr[(i*2)+1] == 0){
+        done = true;
+      }
+    else if(arr[i] > arr[i*2] && arr[i] > arr[(i*2)+1])
     {
-      setSize();
-      if(arr[1] == 0){
-        arr[1] = x;
       
+      if(arr[(i*2)+1] > arr[i*2]){
+        int temp = arr[i];
+        arr[i] = arr[i*2];
+        arr[i*2] = temp;
+        i = i*2;
       }
       else
       {
-        this->getArray()[size+1] = x;
-        PercolateUp(size);
+        int temp = arr[i];
+        arr[i] = arr[(i*2)+1];
+        arr[(i*2)+1] = temp;
+        i = (i*2)+1;
       }
-      setSize();
-    }
-
-  void PercolateDown(int start_index)
-  // use “compare-and-replace” approach
-  {
-    int i = start_index;
-    bool done = false;
-    while(!done && i*2 < capacity){
-      if(arr[i*2] == 0){
-        done = true;
-      }
-      else if(arr[(i*2)+1] == 0){
-          done = true;
-        }
-      else if(arr[i] > arr[i*2] && arr[i] > arr[(i*2)+1])
-      {
         
-        if(arr[(i*2)+1] > arr[i*2]){
-          int temp = arr[i];
-          arr[i] = arr[i*2];
-          arr[i*2] = temp;
-          i = i*2;
-        }
-        else
-        {
-          int temp = arr[i];
-          arr[i] = arr[(i*2)+1];
-          arr[(i*2)+1] = temp;
-          i = (i*2)+1;
-        }
-          
-      }
-      else{
-        done = true;
-      }
     }
-    
+    else{
+      done = true;
+    }
   }
+  
+}
     
     int linear_search(int key)
     {

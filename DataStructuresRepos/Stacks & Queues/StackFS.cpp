@@ -2,7 +2,8 @@
 
 
 using namespace std;
-class StackFS {
+class StackFS 
+{
 public:
     struct StackP
     {
@@ -47,11 +48,13 @@ public:
         }
         
     }
-    char top(){
+    char top()
+    {
       if(!isEmpty()){
         return TOS->data;
       }
-      else{
+      else
+      {
         cout<<"Stack Is Empty"<<endl;
         return '1';
       }
@@ -60,13 +63,16 @@ public:
     {
       return size;
     }
-    void printStack(){
+    void printStack()
+    {
       StackP* temp = TOS;
       int i = 0;
-      while(temp != NULL){
+      while(temp != NULL)
+      {
         i++;
         cout<<temp->data<<endl;
-        if(i != size){
+        if(i != size)
+        {
           cout<<"|"<<endl;
           cout<<"V"<<endl;
         }
