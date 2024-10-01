@@ -243,9 +243,23 @@ int binarySearchI(int arr[], int low, int high, int val){
   }
   return -1;
 }
+
+int findSortedMin(int arr[6],int l, int r){
+  int m = (l+r)/2;
+  if(l == r){
+    return arr[l];
+  }
+  else if(arr[m] > arr[r]){
+    return findSortedMin(arr, m+1,r);
+  }
+  else
+  {
+    return findSortedMin(arr,l,m);
+  }
+}
 int main() {
-int arr[6] = {300,8,66,59,31,7127};
-  ObubbleSort(arr);
+int arr[6] = {3,4,5,6,1,2};
+  cout<<findSortedMin(arr,0,5);
   
   
 

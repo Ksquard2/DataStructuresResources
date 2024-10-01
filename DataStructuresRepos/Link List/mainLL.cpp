@@ -423,17 +423,26 @@ void unitTestDeleteVal(){
   unitTestDeleteVal2();
   unitTestDeleteVal3();
 }
+NodeI* reverseList(NodeI* head) {
+    NodeI* curr = head;
+    NodeI* prev = nullptr;
+    NodeI* next;
+    while (curr != nullptr) {
+        // Step 1: Store next
+        next = curr->next;
+        // Step 2: Reverse current node's next pointer
+        curr->next = prev;
+        // Step 3: Move pointers one position ahead
+        prev = curr;
+        curr = next;
+    }
+      // Return the head of reversed linked list
+    return prev;
+}
 int main() 
 {
-  cout<<"hello"<<endl;
-unitTestDeleteVal();
-//  int arr[5] = {2,3,4,5,6};
-//   NodeI* x = new NodeI();
-//   for(int i = 0;i < 5;i++){
-//     x->append(arr[i]);
-//   }
-//   cout<<"hello"<<endl;
-//   x->prettyPrint();
-  
-  // x->append(9);
+  int arr[5] = {2,3,4,5,6};
+  NodeI* x = new NodeI(arr,5);
+  x->prettyPrint();
+  reverseList(x)->prettyPrint();
 }

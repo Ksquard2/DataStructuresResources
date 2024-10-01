@@ -46,8 +46,8 @@ public:
   }
   NodeI(int *arr, int len)
   {
-    this->data = arr[0];
-    for(int i = 1; i < len; i++){
+    // this->data = arr[0];
+    for(int i = 0; i < len; i++){
       append(arr[i]);
     }
     length = len;
