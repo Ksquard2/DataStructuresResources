@@ -224,7 +224,7 @@ void unitTestappend1()
   LL->append(7);
   int arr2[7] = {1,2,3,4,5,6,7};
   NodeI* answer = new NodeI(arr2,7);;
-  if(isEqual(LL,answer)) cout<<"Test 3 Passed"<<endl;
+  if(*LL==answer) cout<<"Test 3 Passed"<<endl;
   else cout<<"Test 3 Failed"<<endl;
 }
 void unitTestappend2()
@@ -232,7 +232,7 @@ void unitTestappend2()
   NodeI* LL = new NodeI();
   LL->append(7);
   NodeI* answer = new NodeI(7);
-  if(isEqual(LL,answer)) cout<<"Test 4 Passed"<<endl;
+  if(*LL==answer) cout<<"Test 4 Passed"<<endl;
   else cout<<"Test 4 Failed"<<endl;
 }
 void unitTestInsertAt1(){
@@ -241,7 +241,7 @@ void unitTestInsertAt1(){
   LL->insertAt(5,4);
   int arr2[7] = {1,2,3,4,5,6,7};
   NodeI* answer = new NodeI(arr2,7);
-  if(isEqual(LL,answer)) cout<<"Test 5 Passed"<<endl;
+  if(*LL==answer) cout<<"Test 5 Passed"<<endl;
   else cout<<"Test 5 Failed"<<endl;
 }
 void unitTestInsertAt2()
@@ -249,7 +249,7 @@ void unitTestInsertAt2()
   NodeI* LL = new NodeI();
   LL->insertAt(7,0);
   NodeI* answer = new NodeI(7);
-  if(isEqual(LL,answer)) cout<<"Test 6 Passed"<<endl;
+  if(*LL==answer) cout<<"Test 6 Passed"<<endl;
   else cout<<"Test 6 Failed"<<endl;
 }
 void unitTestInsertAt3()
@@ -266,7 +266,7 @@ void unitTestInsertAt4(){
   LL->insertAt(5,9);
   int arr2[6]={1,2,3,4,6,7};
   NodeI* answer = new NodeI(arr2,6);
-  if(isEqual(LL,answer)) cout<<"Test 8 Passed"<<endl;
+  if(*LL==answer) cout<<"Test 8 Passed"<<endl;
   else cout<<"Test 8 Failed"<<endl;
 }
 void unitTestPos1(){
@@ -321,7 +321,7 @@ void unitTestDeleteVal1(){
   LL->DeleteVal(3);
   int arr2[5] = {1,2,4,5,6};
   NodeI* answer = new NodeI(arr2,5);
-  if(isEqual(LL,answer)) cout<<"Test 17 Passed"<<endl;
+  if(*LL==answer) cout<<"Test 17 Passed"<<endl;
   else cout<<"Test 17 Failed"<<endl;
 }
 void unitTestDeleteVal2(){
@@ -330,7 +330,7 @@ void unitTestDeleteVal2(){
   LL->DeleteVal(9);
   int arr2[6] = {1,2,3,4,5,6};
   NodeI* answer = new NodeI(arr2,6);
-  if(isEqual(LL,answer)) cout<<"Test 23 Passed"<<endl;
+  if(*LL==answer) cout<<"Test 23 Passed"<<endl;
   else cout<<"Test 23 Failed"<<endl;
 }
 void unitTestDeleteVal3(){
@@ -346,7 +346,7 @@ void unitTestDeleteAt1()
   LL->DeleteAt(3);
   int arr2[5]={1,2,3,5,6};
   NodeI* answer = new NodeI(arr2,5);
-  if(isEqual(LL,answer)) cout<<"Test 18 Passed"<<endl;
+  if(*LL==answer) cout<<"Test 18 Passed"<<endl;
   else cout<<"Test 18 Failed"<<endl;
 }
 void unitTestDeleteAt2()
@@ -356,7 +356,7 @@ void unitTestDeleteAt2()
   LL->DeleteAt(-1);
   int arr2[6] = {1,2,3,4,5,6};
   NodeI* answer = new NodeI(arr2,6);
-  if(isEqual(LL,answer)) cout<<"Test 19 Passed"<<endl;
+  if(*LL==answer) cout<<"Test 19 Passed"<<endl;
   else cout<<"Test 19 Failed"<<endl;
 }
 void unitTestDeleteAt3()
@@ -366,7 +366,7 @@ void unitTestDeleteAt3()
   LL->DeleteAt(10);
   int arr2[6] = {1,2,3,4,5,6};
   NodeI* answer = new NodeI(arr2,6);
-  if(isEqual(LL,answer)) cout<<"Test 20 Passed"<<endl;
+  if(*LL==answer) cout<<"Test 20 Passed"<<endl;
   else cout<<"Test 20 Failed"<<endl;
 }
 void unitTestDeleteAt4()
@@ -441,8 +441,9 @@ NodeI* reverseList(NodeI* head) {
 }
 int main() 
 {
-  int arr[5] = {2,3,4,5,6};
-  NodeI* x = new NodeI(arr,5);
-  x->prettyPrint();
-  reverseList(x)->prettyPrint();
+ unitTestDeleteVal();
+  // int arr[5] = {2,3,4,5,6};
+  // NodeI* x = new NodeI(arr,5);
+  // x->prettyPrint();
+  // reverseList(x)->prettyPrint();
 }

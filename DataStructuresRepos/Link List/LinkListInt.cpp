@@ -5,6 +5,27 @@ public:
   int data;
   NodeI* next;
   int length;
+
+  bool operator==(NodeI* node)
+  {
+    NodeI* temp = this;
+    NodeI* temp2 = node;
+    if(temp->length != temp2->length)
+    {
+      return false;
+    }
+    while(temp != NULL)
+    {
+      if(temp->data != temp2->data)
+      {
+        return false;
+      }
+      temp = temp->next;
+      temp2 = temp2->next;
+    }
+    return true;
+  }
+
   // Default constructor
   NodeI()
   {
@@ -52,6 +73,7 @@ public:
     }
     length = len;
   } 
+
   void prettyPrint()
   {
     NodeI* temp = this;
