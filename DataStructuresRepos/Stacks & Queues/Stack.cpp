@@ -8,23 +8,19 @@ class Stack
   int stack[30];
   int TOS = 0;
   int top = stack[TOS-1];
-
+//Stack functions
     bool isSEmpty()
     {
       return TOS == 0;
     }
     bool isSFull()
     {
-      if(TOS >= 30)
-      {
-        return true;
-      }
-      else return false;
+      return TOS >= 30;
     }
 
     void push (int i) 
     {
-      if(!this->isSFull())  
+      if(!isSFull())  
       {
         stack[TOS] = i;
         TOS++;
@@ -49,7 +45,7 @@ class Stack
     }
     int getTop()
     {
-      if(this->isSEmpty())
+      if(isSEmpty())
       {
         cout<<"Stack Is Empty"<<endl;
         return -1;

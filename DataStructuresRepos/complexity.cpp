@@ -1,5 +1,5 @@
 #include <iostream>
-
+#include <chrono>
 
 using namespace std;
 
@@ -11,11 +11,14 @@ void print(int arr[], int n)
     cout<<endl;
 } 
 
-void printArray(int arr[5])
+void printArray(int arr[10])
 {
-  for(int x = 0; x < 5;x++)
+  for(int x = 0; x < 10;x++)
   {
-    cout<<arr[x]<<" ";
+    if(arr[x] != -1){
+      cout<<arr[x]<<" ";
+    }
+    
   }
   cout<<endl;
 }
@@ -95,10 +98,31 @@ void insertion(int arr[5])
           arr[j-1] = arr[j];
           arr[j] = temp;
         }
-        else break;
       }
       printArray(arr); 
   }
+}
+void insertion(int arr[10], int val) //Sorted Lists
+{
+  int curr = 0;
+  for(int i = 9;i > 0; i--){
+    if(arr[i-1] != -1){
+      curr = i;
+      break;
+    }
+  }
+  arr[curr] = val;
+  for(int j = curr;j > 0;j--)
+      {
+        if(arr[j-1] > arr[j])
+        {
+          int temp = arr[j-1];
+          arr[j-1] = arr[j];
+          arr[j] = temp;
+        }
+      }
+    printArray(arr); 
+
 }
 void merge(int arr1[4], int arr2[4], int res[8])
 {  
@@ -167,18 +191,13 @@ void countSort(int arr[], int n, int exp)
 
     for (i = 0; i < n; i++) {
         count[(arr[i] / exp) % 10]++; 
-
     }
-    print(count,10);
-
-
+    // print(count,10);
     for (i = 1; i < 10; i++) {
-        count[i] += count[i - 1]; 
+        count[i] += count[i - 1];  
         
 
     }
-
-    
 
     // Build the output array 
     for (i = n - 1; i >= 0; i--) { 
@@ -205,7 +224,7 @@ void radixsort(int arr[], int n)
     }
 } 
 
-int binarySearch(int arr[], int low, int high, int val){
+int binarySearch(int arr[], int low, int high, int val){ //big O notation
   if(low == high)
   {
     return -1;
@@ -257,12 +276,88 @@ int findSortedMin(int arr[6],int l, int r){
     return findSortedMin(arr,l,m);
   }
 }
-int main() {
-int arr[6] = {3,4,5,6,1,2};
-  cout<<findSortedMin(arr,0,5);
+
+void recurrenceRelation(int n,string str = ""){
+  if(n != 1){
+    cout<<"C("<<n<<") = ";
+    string added = " + 4("+to_string(n-1)+")";
+    str = str+added;
+    cout<<"C("<<to_string(n-1)<<") "<<str<<endl;
+    recurrenceRelation(n-1,str);
+  }
+}
+unsigned long long int recursion(unsigned long long int a, unsigned long long int prev = 1,unsigned long long int curr = 1)
+{
+  if (a == 1)
+  {
+
+    return curr;
+  }
+  else return recursion(a-1,curr,curr+prev);
+}
+
+// unsigned long long int recursion(unsigned long long int a)
+// {
+//   unsigned long long int prev = 1;
+//   unsigned long long int curr = 1;
+//   return helper(a-1, prev,curr);
+// }
+unsigned long long int recursion2(unsigned long long int fib) 
+{
+   if (fib <= 1) 
+   {
+      return fib;
+   }
+   else 
+   {
+      return (recursion2(fib-1) + recursion2(fib-2));
+   }
+}
+int main() 
+{
+
+    int f;
+  cout<<"Enter number to find the value of its fibonacci index: ";
+  cin>>f;
+  cout<<endl;
+
+  int fib = f;
   
+  auto starti = chrono::high_resolution_clock::now();
   
+  cout<<"The recursive 1 algorithm outputs: "<<recursion(fib)<<endl;
 
+  auto endi = chrono::high_resolution_clock::now();
+  
+  cout<<endl;
+  
+  double speedi = chrono::duration_cast<chrono::nanoseconds>(endi-starti).count();
+  
+  cout<<(speedi / 1e+9)<<" seconds of performace time for Fibonacci iteration"<<endl;
 
+  cout<<endl;
 
+  auto startr = chrono::high_resolution_clock::now();
+  
+  cout<<"The recursive algorithm outputs: "<<recursion2(fib+1)<<endl;
+  
+  auto endr = chrono::high_resolution_clock::now();
+  
+  cout<<endl;
+  
+  double speedr = chrono::duration_cast<chrono::nanoseconds>(endr-startr).count();
+  
+  cout<<(speedr / 1e+9)<<" seconds of performace time for Fibonacci recursion"<<endl;
+
+  // int arr[6] = {3,890,20,46,31,8};
+  // radixsort(arr,6);
+// recurrenceRelation(5);
+// int arr[10] = {-1,-1,-1,-1,-1,-1,-1,-1,-1,-1};
+// insertion(arr,5);
+// insertion(arr,3);
+// insertion(arr,9);
+// insertion(arr,1);
+// insertion(arr,8);
+// insertion(arr,4);
+// insertion(arr,7);
 }

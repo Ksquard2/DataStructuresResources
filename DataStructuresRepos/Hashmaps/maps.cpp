@@ -2,6 +2,8 @@
 #include <algorithm>
 #include <vector>
 #include <map>
+#include "Quadratic.h"
+#include "Double.h"
 using namespace std;
 
 class town {
@@ -24,19 +26,31 @@ public:
 };
 
 int main() {
-    town t("mainstreet", 30, "ahmed");
-    town a("peepstreet", 20, "bamed");
-    town b("meatstreet", 20, "locmed");
+    DHash map;
+    int arr[8] = {23,34,63,55,48,14,94,74};
+    for(int item : arr){
+        map.insert(item);
+    }
 
-    map<string, town> myMap;
-    myMap[t.name] = t;
-    myMap[a.name] = a;
-    myMap[b.name] = b;
+
+
+
+
+
+    // town t("mainstreet", 30, "ahmed");
+    // town a("peepstreet", 20, "bamed");
+    // town b("meatstreet", 20, "locmed");
+
+    // map<string, town> myMap;
+    // myMap[t.name] = t;
+    // myMap[a.name] = a;
+    // myMap[b.name] = b;
+
 
     // Using the printClass method
-    myMap["mainstreet"].printClass();  // Outputs: is the mayor of mainstreet with a population of 30
-    myMap["peepstreet"].printClass(); 
-    myMap["meatstreet"].printClass(); 
+    // myMap["mainstreet"].printClass();  // Outputs: is the mayor of mainstreet with a population of 30
+    // myMap["peepstreet"].printClass(); 
+    // myMap["meatstreet"].printClass(); 
 
   // for(int i = 0;i < 3;i++)
   // {

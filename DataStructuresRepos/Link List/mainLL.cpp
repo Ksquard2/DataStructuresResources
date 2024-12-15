@@ -2,24 +2,10 @@
 #include "LinkListInt.cpp"
 #include "LinkListChar.cpp"
 #include "LinkListString.cpp"
+#include "Polynomial.h"
 #include <string>
+#include <map>
 using namespace std;
-
-
-NodeI *arrToList(int *arr, int len)
-{
- 
-    NodeI *head = new NodeI(arr[0]);
-  cout<<arr[0]<<endl;
-    for(int i = 1; i < len;i++)
-    {
-      
-        int val = arr[i];
-        head->append(val);
-    }
-    return head->next;
-}
-
 
 int listSum(NodeI *head)
 {
@@ -44,52 +30,6 @@ int listProduct(NodeI *head)
     return head->data * listProduct(head->next);
   }
 }
-int indexOf(NodeI *head,int val)
-{
-  auto temp = head;
-  int index = 0;
-  while(temp->data != val && temp != nullptr)
-  {
-    index++;
-    temp = temp->next;
-  }
-  if(temp != nullptr)
-  {
-    return index;
-  }
-  else return -1;
-  // while(temp->next != nullptr)
-  // {
-  //   temp = temp->next;
-  //   if(temp->data == val)
-  //   {
-  //     return index;
-  //   }
-
-  //   else index++;
-  //   cout<<index<<endl;
-  // }
-  // return -1;
-
-}
-// NodeI *insertAt(NodeI *head,int val,int index)
-// {
-//   NodeI* temp = head;
-//   int i = 0;
-//   NodeI* value;
-//   value = new NodeI(val);
-//   while(i < index-1 && temp != nullptr)
-//   {
-//     temp = temp->next;
-//     i++;
-//   }
-//   if(temp != nullptr)
-//   {
-//     value->next = temp->next;
-//     temp->next = value;
-//   }
-//   return head;
-// }
 
 NodeI *rotate(NodeI* head, int n)
 {
@@ -117,28 +57,8 @@ NodeI *rotate(NodeI* head, int n)
   Last->next = nullptr;
   return head;
 }
-
-bool isEqual(NodeI *head1, NodeI *head2){
-  if(head1->isEmpty() && head2->isEmpty()){
-    return true;
-  }
-  if(head1->isEmpty() || head2->isEmpty()){
-    return false;
-  }
-  if(head1->len() != head2->len()){
-    return false;
-  }
-  
-  NodeI* temp1 = head1;
-  NodeI* temp2 = head2;
-  while(temp1 != nullptr && temp2 != nullptr){
-    if(temp1->data != temp2->data){
-      return false;
-    }
-    temp1 = temp1->next;
-    temp2 = temp2->next;
-  }
-  return true;
+void move(NodeI* head){
+  head = head->next;
 }
 void insertString(NodeI* s1, NodeI* s2, int k) 
 {
@@ -150,6 +70,7 @@ void insertString(NodeI* s1, NodeI* s2, int k)
   }
   for (int i = 0; i < k - 1; i++) 
   {
+
     temp1 = temp1->next;
   }
   while  (temp2->next != nullptr) 
@@ -423,6 +344,7 @@ void unitTestDeleteVal(){
   unitTestDeleteVal2();
   unitTestDeleteVal3();
 }
+
 NodeI* reverseList(NodeI* head) {
     NodeI* curr = head;
     NodeI* prev = nullptr;
@@ -439,11 +361,339 @@ NodeI* reverseList(NodeI* head) {
       // Return the head of reversed linked list
     return prev;
 }
+
+void badappend(NodeI* head, int val){ //memory leakage
+  NodeI* nn = new NodeI(val);
+  while(head->next != NULL){
+    head = head->next;
+  }
+  head->next = nn;
+}
+
+int Length = 0;
+string substring(string str, int start, int end){
+  string sub = "";
+  for(int i = start; i < end; i++){
+    sub += str[i];
+  }
+  return sub;
+}
+NodePoly* stringToPoly(string s)
+{
+  bool negExp = false;
+  NodePoly* Poly = NULL;
+  int track = 0;
+  bool expoCheck = false;
+  bool NegCheck = false;
+  string coe = "";
+  string exp = "";
+  int coei;
+  int expi;
+  for(int i = 0; i < s.length(); i++)
+  {
+    if(s[i] == 'x')//when collecting the coefficent
+    {
+      coe = substring(s,track, i);// Step 1: take a substring from the beginning or operator to the x
+      if(track != 0)
+      {
+        if(s[track-1] == '-')//if the operator is negative we will track that info
+        {
+          
+          NegCheck = true;
+        }
+        else{
+          NegCheck = false;
+        }
+      }
+    }
+    
+    if(s[i] == '+' || s[i] == '-'|| i == s.length()-1)// the full exponent is over
+    {
+        
+        if(s.length()-1 == i)//this part considers if the exponent is at the end
+        {
+          if(s[i] == 'x')
+          {
+            exp = "1";
+          }
+          else if(s[i] >= '0' && s[i-1] <= '9'){ //this may cause a bug
+            exp = "0";
+          }
+          else
+          {
+            exp = substring(s,track, i+1);
+          }
+        }
+        
+        else if(s[i-1] == 'x')//when the exponent is 1
+        {
+          exp = "1";
+        }
+        else if(s[i-1] >= '0' && s[i-1] <= '9' && !expoCheck){//when the exponent is 0
+          exp = "0";
+        }
+        else//when the exponent is bigger than 1
+        {
+          exp = substring(s,track, i);
+        }
+      coei = stoi(coe);//converting them into integers
+      // if(negExp){
+      //   expi = -1*stoi(exp);
+      // }
+      // else{
+        expi = stoi(exp);
+      // }
+      
+      if(NegCheck)//adding the negative to the coefficent if necessary
+      {
+        coei = -coei;
+      }
+      if(Poly == NULL)//creating the first term
+      {
+        Poly = new NodePoly(coei, expi);
+      }
+      else//adding another term
+      {
+        NodePoly *add = new NodePoly(coei, expi);
+        Poly->append(add);
+
+      }
+      track = i+1;//moving tracker to start tracking the coeffiecent again
+      negExp = false;
+      expoCheck = false;
+    }
+    if(s[i] == '^')//when beginning to collect the exponent we reset the tracker to one past the upper
+    {
+
+      track = i+1;
+      expoCheck = true;
+      if(s[i+1] == '-'){
+        i++;
+        negExp = true;
+      }
+    }
+  }
+  return Poly;
+}
+
+NodePoly *AddPolynomials(string arr[],int len)
+{
+  NodePoly *PolyArr[len];
+  for(int i = 0; i < len; i++)
+  {
+    // NodePoly *Poly = NULL;
+
+    PolyArr[i] = stringToPoly(arr[i]);
+
+
+  }
+  int min = PolyArr[0]->exp;
+  int max = PolyArr[0]->exp;
+
+  for(int i = 0; i < len; i++)
+  {
+    NodePoly* temp = PolyArr[i];
+    while(temp != NULL)
+    {
+      if(temp->exp < min)
+      {
+        min = temp->exp;
+      }
+      if(temp->exp > max)
+      {
+        max = temp->exp;
+
+      }
+      temp = temp->next;
+    }
+  }
+  NodePoly *final = NULL;
+  for(int i = max; i>=min;i--){
+    int sum = 0;
+    for(int j = 0; j < len; j++)
+    {
+      NodePoly *temp = PolyArr[j];
+      while(temp != NULL)
+      {
+        if(temp->exp == i){
+          sum += temp->coe;
+        }
+        temp = temp->next;
+      }
+    }
+    if(sum != 0)
+    {
+
+      if(final == NULL){
+        final = new NodePoly(sum,i);
+      }
+      else{
+         final->append(new NodePoly(sum,i));
+      }
+      sum = 0;
+    }
+  }
+  return final;
+}
+bool isin(NodeI *allCoes,int num){
+  NodeI *temp = allCoes;
+  while(temp != NULL){
+    if(temp->data == num){
+      return true;
+    }
+    temp = temp->next;
+  }
+  return false;
+}
+
+NodePoly* simplify(NodePoly *Poly)
+{
+  int max = 0;
+  int min = Poly->exp;
+NodePoly* temp = Poly;
+map<int,int> Mymap;
+while(temp){
+  if(min > temp->exp){
+    min = temp->exp;
+  }
+  if(max < temp->exp){
+    max = temp->exp;
+  }
+
+  if(Mymap.count(temp->exp)){
+    Mymap[temp->exp]+=temp->coe;
+  }
+  else{
+    Mymap[temp->exp] = temp->coe;
+  }
+  temp = temp->next;
+}
+NodePoly* answer = NULL;
+for(int i = max;i >= min;i--){
+  if(Mymap.count(i)){
+    NodePoly* curr = new NodePoly(Mymap[i],i);
+    if(!answer){
+      answer = curr;
+    }
+    else{
+      answer->append(curr);
+    }
+  }
+}
+return answer;
+// int max = 0;
+// NodePoly* temp = Poly;
+// while(temp){
+//   if(max < temp->exp){
+//     max = temp->exp;
+//   }
+//   temp = temp->next;
+// }
+//   int arr[max+1];
+//   for(int i = 0;i <= max;i++){
+//     arr[i] = 0;
+//   }
+//   temp = Poly;
+//   while(temp){
+//     arr[temp->exp]+=temp->coe;
+//     temp = temp->next;
+//   }
+//   NodePoly* answer = NULL;
+//   for(int i = max; i > -1;i--){
+//     if(arr[i]){
+//       NodePoly* curr = new NodePoly(arr[i],i);
+//       if(answer){
+//         answer->append(curr);
+//       }
+//       else{
+//         answer = curr;
+//       }
+      
+//     }
+//   }
+//   return answer;
+
+}
+NodePoly *Multiply2(NodePoly *Poly2,NodePoly *Poly1){
+  NodePoly *PolyF = NULL;
+  NodePoly *temp1  = Poly1;
+  while(temp1 != NULL)
+  {
+     NodePoly *temp2  = Poly2;
+    while(temp2 != NULL)
+    {
+      NodePoly *term = new NodePoly(temp1->coe * temp2->coe, temp1->exp + temp2->exp);
+      if(PolyF == NULL){
+        PolyF = term;
+      }
+      else
+      {
+        PolyF->append(term);
+      }
+      temp2 = temp2->next;
+    }
+    temp1 = temp1->next;
+  }
+  PolyF = simplify(PolyF);
+  return PolyF;
+}
+
+NodePoly *MultiplyPolynomials(string arr[], int Length)
+{
+  NodePoly *PolyArr[Length];
+  for(int i = 0; i < Length; i++)
+  {
+    PolyArr[i] = stringToPoly(arr[i]);
+  }
+  NodePoly *answer = PolyArr[0];
+  for(int i = 1; i < Length; i++)
+  {
+    answer = Multiply2(answer,PolyArr[i]);
+  }
+  return answer;
+}
+
+bool IsIn(NodeI* head, int target){
+  if(head == NULL){
+    return false;
+  }
+  else if(head->data == target){
+    return true;
+  }
+  else{
+    return IsIn(head->next, target);
+  }
+}
+
+
+
+
+
+
+
+
 int main() 
 {
- unitTestDeleteVal();
-  // int arr[5] = {2,3,4,5,6};
-  // NodeI* x = new NodeI(arr,5);
-  // x->prettyPrint();
-  // reverseList(x)->prettyPrint();
+  int arr[5] = {1,2,6,7,8};
+  int arr1[3] = {3,4,5};
+  NodeI* head = new NodeI(arr,5);
+  NodeI* head2 = new NodeI(arr1,3);
+  insertString(head,head2,2);
+  head->prettyPrint();
+
+//   int Length;
+//  cout<<"How Many Polynomials: ";
+//   cin>>Length;
+//   string arr[Length];
+//   for(int i = 0; i < Length; i++){
+//     cout<<"Enter Polynomial "<<i+1<<": ";
+//     cin>>arr[i];
+//   }
+//   NodePoly* final = AddPolynomials(arr,Length);
+//   cout<<"Adding ";
+//   final->prettyPrint();
+//   NodePoly *PolyF = MultiplyPolynomials(arr,Length);
+//   cout<<"Multiplying ";
+//   PolyF->prettyPrint();
+
 }

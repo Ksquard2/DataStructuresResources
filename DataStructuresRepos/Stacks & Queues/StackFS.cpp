@@ -1,5 +1,5 @@
 #include <iostream>
-
+#include <string>
 
 using namespace std;
 class StackFS 
@@ -7,7 +7,7 @@ class StackFS
 public:
     struct StackP
     {
-      char data;
+      string data;
       StackP* next;
     };
     StackP* TOS;
@@ -24,15 +24,22 @@ public:
     {
         return (size == 0 && TOS == NULL);
     }
-    void push(char data)
+    void push(string data)
     {
+      if(isEmpty()){
+        StackP* newNode = new StackP();
+        newNode->data = data;
+        TOS = newNode;
+      }
+      else{
         StackP* newNode = new StackP();
         newNode->data = data;
         newNode->next = TOS;
-        TOS = newNode;
+        TOS = newNode;  
+      }
         size++;
     }
-    char pop()
+    string pop()
     {
         StackP* temp = TOS;
         if (!isEmpty())
@@ -44,11 +51,11 @@ public:
         else
         {
           cout << "Stack is empty" << endl;
-          return '1';
+          return "1";
         }
         
     }
-    char top()
+    string top()
     {
       if(!isEmpty()){
         return TOS->data;
@@ -56,7 +63,7 @@ public:
       else
       {
         cout<<"Stack Is Empty"<<endl;
-        return '1';
+        return "1";
       }
     }
     int getSize()

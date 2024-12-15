@@ -1,1 +1,1 @@
-  // NN->append(head->data);
+ 

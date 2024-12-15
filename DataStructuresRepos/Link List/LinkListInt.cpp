@@ -3,8 +3,9 @@ using namespace std;
 class NodeI {
 public:
   int data;
-  NodeI* next;
-  int length;
+  NodeI* next; 
+  int length; //Iterators
+  
 
   bool operator==(NodeI* node)
   {
@@ -33,14 +34,14 @@ public:
       next = NULL;
   }
 
-  // Parameterised Constructor
+  // Parameterised Constructor & put item
   NodeI(int data)
   {
       this->data = data;
       length = 1;
       this->next = NULL;
   }
-
+  
   bool isEmpty()
   {
     return length == 0;
@@ -48,7 +49,8 @@ public:
   int len(){
     return length;
   }
-  void append(int val)
+  
+  void append(int val) //transformer
   {
     if(isEmpty()){
       this->data = val;
@@ -65,7 +67,7 @@ public:
     }
     length++;
   }
-  NodeI(int *arr, int len)
+  NodeI(int *arr, int len)//pass by reference & chaining
   {
     // this->data = arr[0];
     for(int i = 0; i < len; i++){
@@ -137,7 +139,7 @@ int posOf(int d){
   return -1;
 }
 
-void DeleteVal(int val)
+void DeleteVal(int val) //delete items
 {
     if(isEmpty())
     {
@@ -199,7 +201,7 @@ void DeleteAt(int pos)
     length--;
   }
 }
-int elementAt(int i)
+int elementAt(int i) //get item
 {
   if(isEmpty())
   {

@@ -2,7 +2,7 @@
 using namespace std;
 class StackF {
 public:
-    struct StackP
+    struct StackP //classes vs structs
     {
       int data;
       StackP* next;

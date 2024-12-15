@@ -23,26 +23,16 @@ class MinHeap
       capacity = cap;
       arr = new int[cap];
     }
+   
     int* getArray(){
       return arr;
     }
-void PercolateUp(int last){
-    bool done = false;
-    int i = last+1;
-    while(!done)
+void PercolateUp(int last_index){
+    if(arr[last_index] < arr[last_index/2] && last_index != 1)
     {
-      if(arr[i/2] < arr[i])
-      {
-        done = true;
-      }
-      else
-      {
-        int swap_element = arr[i/2];
-        arr[i/2] = arr[i];
-        arr[i] = swap_element;
-        i = i/2;
-      }
-      
+      swap(arr[last_index],arr[last_index/2]);
+      last_index/=2;
+      PercolateUp(last_index);
     }
 }
 void setSize()
@@ -56,19 +46,29 @@ void setSize()
 }
 void insert(int x)
 {
-  setSize();
   if(arr[1] == 0){
     arr[1] = x;
-  
   }
   else
   {
-    this->getArray()[size+1] = x;
-    PercolateUp(size);
+    this->getArray()[size] = x;
+    int last = size;
+    PercolateUp(last);
   }
-  setSize();
+  size++;
 }
 
+ MinHeap(int array[],int len, int cap)
+ {
+      arr = new int[cap];
+      size = 1;
+      for (int i = 0;i < len; i++)
+      {
+        this->insert(array[i]);
+      }
+      capacity = cap;
+      size = len;
+  }
 void PercolateDown(int start_index)
 // use “compare-and-replace” approach
 {
@@ -122,11 +122,11 @@ void PercolateDown(int start_index)
     {
       return ceil(log2(size + 1));
     }
-    void DeleteMin(int minimal_value)
+    void DeleteMin()
     {
      if (!IsEmpty())
      {  
-      minimal_value = arr[1];
+      int minimal_value = arr[1];
       arr[1] = arr[size];
       arr[size] = 0;
       PercolateDown(1);
@@ -134,6 +134,11 @@ void PercolateDown(int start_index)
      setSize();
 
     }
+    void printHeapLin(){
+    for(int i = 1; i < size; i++){
+      cout<<arr[i]<<" ";
+    }
+  }
   void printHeap(){
     int checker = 1;
     int indent = 0;

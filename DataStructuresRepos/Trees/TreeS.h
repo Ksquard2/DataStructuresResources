@@ -3,6 +3,7 @@
 
 
 
+
 using namespace std;
 
 class TreeS
@@ -36,6 +37,9 @@ public:
       this->right = NULL;
       size = 0;
   }
+
+
+
   
   
   
