@@ -7,17 +7,18 @@
 
 //Phonebook class 905, Name
 using namespace std;
-
+#include <vector>
 class Hashtable {
   private:
-    static const int hashGroups = 10;
-    NodePair *table[hashGroups];
+    int hashGroups;
+    vector<NodePair*> table;
   public:
-    Hashtable()
+    Hashtable(int hg)
     {
+      hashGroups = hg;
       for(int i = 0; i < hashGroups; i++)
       {
-        table[i] = nullptr;
+        table.push_back(NULL);
       }
     }
     

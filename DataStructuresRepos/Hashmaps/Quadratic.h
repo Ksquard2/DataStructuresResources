@@ -16,12 +16,10 @@ class QHash {
             if(map[i] != -1){
                 cout<<map[i]<<"("<<i<<") ";
             }
-            
         }
         cout<<endl;
     }
     void insertHelper(int x, int index, int coll = 0){
-
         if(map[index] == -1){
             map[index] = x;
         }

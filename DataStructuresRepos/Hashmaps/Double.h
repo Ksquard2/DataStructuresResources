@@ -4,12 +4,15 @@ using namespace std;
 
 class DHash{
     private:
+        int hashVar;
         int map[10];
     public:
-        DHash(){
+
+        DHash(int hv){
             for(int i = 0;i < 10;i++){
                 map[i] = -1;
             }
+            hashVar = hv;
         }
         void printHash(){
             for(int i = 0;i < 10;i++){
@@ -25,7 +28,7 @@ class DHash{
             }
             else if(coll <= 30){
                 coll++;
-                index = (x%10 + coll*(7-(x%7)))%10;
+                index = (x%10 + coll*(hashVar-(x%hashVar)))%10;
                 insertHelper(x,index,coll);
             }
             else{
@@ -36,5 +39,6 @@ class DHash{
             insertHelper(x,x%10);
             printHash();
         }
+        
 
 };

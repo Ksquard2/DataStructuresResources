@@ -26,7 +26,7 @@ public:
 };
 
 int main() {
-    DHash map;
+    DHash map(7);
     int arr[8] = {23,34,63,55,48,14,94,74};
     for(int item : arr){
         map.insert(item);

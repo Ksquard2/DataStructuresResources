@@ -2,27 +2,30 @@
 using namespace std;
 class NodeI {
 public:
-  int data;
-  NodeI* next; 
+  struct Node{
+    int data;
+    Node* next;
+  };
+  Node* head =  new Node;
   int length; //Iterators
   
 
-  bool operator==(NodeI* node)
+  bool operator==(NodeI node)
   {
-    NodeI* temp = this;
-    NodeI* temp2 = node;
-    if(temp->length != temp2->length)
+    Node* temp = head;
+    NodeI temp2 = node;
+    if(length != temp2.length)
     {
       return false;
     }
-    while(temp != NULL)
+    while(temp && temp2.head)
     {
-      if(temp->data != temp2->data)
+      if(temp->data != temp2.head->data)
       {
         return false;
       }
-      temp = temp->next;
-      temp2 = temp2->next;
+      temp= temp->next;
+      temp2.head = temp2.head->next;
     }
     return true;
   }
@@ -31,15 +34,15 @@ public:
   NodeI()
   {
       length = 0;
-      next = NULL;
+      head = NULL;
   }
 
   // Parameterised Constructor & put item
   NodeI(int data)
   {
-      this->data = data;
+      head->data = data;
       length = 1;
-      this->next = NULL;
+      head->next = NULL;
   }
   
   bool isEmpty()
@@ -51,34 +54,36 @@ public:
   }
   
   void append(int val) //transformer
-  {
+  {   
+      Node* newNode = new Node;
+      newNode->data = val;
+      newNode->next = NULL;
     if(isEmpty()){
-      this->data = val;
+      head = newNode;
     }
     else{
-      NodeI* temp = this;
-      NodeI* newNode = new NodeI(val);
-      while(temp->next != NULL)
+      Node* temp = head;
+      while(temp->next)
       {
         temp = temp->next;
       }
       temp->next = newNode;
-      
     }
     length++;
   }
-  NodeI(int *arr, int len)//pass by reference & chaining
+  NodeI(int arr[], int len)//pass by reference & chaining
   {
     // this->data = arr[0];
     for(int i = 0; i < len; i++){
       append(arr[i]);
     }
+    
     length = len;
   } 
 
   void prettyPrint()
   {
-    NodeI* temp = this;
+    Node* temp = head;
       while(temp != NULL)
       {
         if(temp->next != NULL)
@@ -95,40 +100,42 @@ public:
   
   }
 
-void insertAtHelper(NodeI* node, int data, int pos)
-{
-  if(pos == 0)
+
+  void insertAt(int val, int pos)
   {
-    node->data = data;
-   
-  }
-  else if(pos == 1)
-  {
-    NodeI* newNode = new NodeI(data);
-    newNode->next = node->next;
-    node->next = newNode;
-  }
-  else
-  {
-    insertAtHelper(node->next, data, pos-1);
-  }
-}
-  void insertAt(int data, int pos)
-  {
+      Node* nn = new Node;
+      nn->data = val;
     if(pos > length){
       cout<<"Invalid position"<<endl;
     }
-    else{
-      NodeI* temp = this;
-      insertAtHelper(temp, data, pos);
+    else if(pos == 0 && !head){
+      head = nn;
       length++;
     }
+    else if(!pos && head){
+      nn->next = head;
+      head = nn;
+      length++;
+    }
+    else{
+      
+      Node* temp = head;
+      while(pos > 1){
+        temp = temp->next;
+        pos--;
+      }
+      nn->next = temp->next;
+      temp->next = nn;
+      length++;
+    }
+    
+
   }
 int posOf(int d){
   if(isEmpty()){
     return -1;
   }
-  NodeI* temp = this;
+  Node* temp = head;
   int pos = 0;
   while(temp != NULL){
     if(temp->data == d)
@@ -147,8 +154,8 @@ void DeleteVal(int val) //delete items
     }
     else
     {
-      NodeI *prev = NULL;
-      NodeI *curr = this;
+      Node *prev = NULL;
+      Node *curr = head;
 
       while(curr->next != NULL && curr->data != val)
       {
@@ -180,8 +187,8 @@ void DeleteAt(int pos)
   }
   else
   {
-    NodeI *prev = NULL;
-    NodeI *curr = this;
+    Node *prev = NULL;
+    Node *curr = head;
 
     while(pos != 0)
     {
@@ -207,15 +214,17 @@ int elementAt(int i) //get item
   {
     return -1;
   }
-  NodeI* temp = this;
-  while(temp != NULL && i > 0)
+  if(i > length-1){
+    return -1;
+  }
+  Node* temp = head;
+  while(i > 0)
   {
     temp = temp->next;
     i--;
   }
-  if(temp == NULL) return -1;
-    
-  else return temp->data;
+  return temp->data;
+  
 }
 
 bool IsIn(int d)
@@ -224,7 +233,7 @@ bool IsIn(int d)
   {
     return false;
   }
-  NodeI* temp = this;
+  Node* temp = head;
   while(temp->next != NULL)
   {
     if(temp->data == d) 
@@ -236,7 +245,91 @@ bool IsIn(int d)
   }
   return false;
 }
+NodeI rotate(int n)
+{
+  prettyPrint();
+  if(isEmpty() || !head->next){
+    return *this;
+  }
+  Node* Last = head;
+  int i = (length - (n%(length)));
+  while (Last->next != nullptr) 
+  {
+    Last = Last->next;
 
+  }
+  
+  Last->next = head;
+  while (i > 0)
+  {
+    head = head->next;
+    Last = Last->next;
+    i--;
+  }
+  Last->next = nullptr;
+  prettyPrint();
+  return *this;
+}
+void insertList(NodeI s2, int k) 
+{
+  Node* temp1 = head;
+  Node* temp2 = s2.head;
+  if (temp1 == nullptr || temp2 == nullptr) 
+  {
+    return;
+  }
+  for (int i = 0; i < k - 1; i++) 
+  {
+
+    temp1 = temp1->next;
+  }
+  while  (temp2->next != nullptr) 
+  {
+    temp2 = temp2->next;
+  }
+
+  temp2->next = temp1->next;
+  temp1->next = s2.head;
+  prettyPrint();
+}
+void deleteAll(int val)
+{
+  Node* temp = head;
+  Node* prev = NULL;
+  while(temp->data == val){
+    head = temp->next;
+    temp = temp->next;
+  }
+  while(temp != NULL){
+    if(temp->data == val){
+      prev->next = temp->next;
+      temp = temp->next;
+      prev->next = NULL;
+    }
+    else
+    {
+      prev = temp;
+      temp = temp->next;
+    }
+  }
+}
+
+NodeI reverseList() {
+    Node* curr = head;
+    NodeI prev;
+    Node* next;
+    while (curr != nullptr) {
+        // Step 1: Store next
+        next = curr->next;
+        // Step 2: Reverse current node's next pointer
+        curr->next = prev.head;
+        // Step 3: Move pointers one position ahead
+        prev.head = curr;
+        curr = next;
+    }
+      // Return the head of reversed linked list
+    return prev;
+}
 };
  
 
