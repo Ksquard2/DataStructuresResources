@@ -14,7 +14,7 @@ class QHash {
     void printHash(){
         for(int i = 0;i < 10;i++){
             if(map[i] != -1){
-                cout<<map[i]<<"("<<i<<") ";
+                cout<<"("<<i<<") "<<map[i]<<endl;
             }
         }
         cout<<endl;

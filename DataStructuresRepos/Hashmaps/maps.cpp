@@ -4,6 +4,7 @@
 #include <map>
 #include "Quadratic.h"
 #include "Double.h"
+#include <set>
 using namespace std;
 
 class town {
@@ -24,13 +25,60 @@ public:
         cout << mayor << " is the mayor of " << name << " with a population of " << pop << endl;
     }
 };
-
+struct student{
+    string name;
+    int age;
+    int height;
+    string major;
+    bool online;
+};
 int main() {
-    DHash map(7);
-    int arr[8] = {23,34,63,55,48,14,94,74};
+   
+    int arr[10] = {389, 409, 999, 2785, 335, 872, 656, 3061, 561, 4000};
+    map<int, vector<int> > myMap;
     for(int item : arr){
-        map.insert(item);
+        myMap[item%10].push_back(item);
     }
+
+    for(int i = 0;i < 10;i++){
+        if(myMap.count(i)){
+            cout<<"("<<i<<") ";
+            for(int item : myMap[i]){
+                cout<<item<<" ";
+            }
+            cout<<endl;
+        }
+    }
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+    // map<int,int> myMap;
+    // vector<int> v;
+    // set<int> mySet;
+    // int arr[9] = {23,34,63,55,48,14,94,74};
+    // for(int item : arr){
+    //     if(mySet.find(item) == mySet.end()){
+    //         mySet.insert(item);
+    //     }
+    //     else{
+    //         cout<<item<<endl;
+    //     }
+    // }
 
 
 
