@@ -103,6 +103,32 @@ public:
         // Insert the key into the non-full root
         insertNonFull(root, key);
     }
+    bool isIn(Node* c, int x){
+        for(int i = 0;i < 4;i++){
+            if(!c){
+                cout<<x<<" is not in the tree."<<endl;
+                return false;
+            }
+            if(c->keys[i] == x){
+                cout<<x<<" is in the tree."<<endl;
+                return true;
+            }
+            if(!c->leaf){
+                if(c->keys[i] > x){
+                    return isIn(c->pointers[i],x);
+                }
+                else if(c->keys[i] < x && i == 3){
+                    return isIn(c->pointers[i+1],x);
+                }
+            }
+            else{
+                if(c->keys[i] == -1){
+                    cout<<x<<" is not in the tree."<<endl;
+                    return false;
+                }
+            }
+        }
+    }
 
     // Helper function to print the tree (for debugging)
     void print(Node* node, int level = 0) {

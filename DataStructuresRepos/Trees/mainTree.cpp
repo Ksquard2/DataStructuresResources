@@ -138,23 +138,26 @@ void printTree2(TreeI* root){
 
 int main() 
 {   
-    Kiel* root = new Kiel;
-    insertChild(root,"OG","Damon Kiel");
-    insertChild(root,"Damon Kiel","Donna Kiel");
-    insertChild(root,"Damon Kiel","Danna Kiel");
-    insertChild(root,"Danna Kiel","Ali Kiel");
-    insertChild(root,"Donna Kiel","Ahmed Kiel");
-    printFam(root);
-    // bTrees tree;
-    // tree.insert(10);
-    // tree.insert(20);
-    // tree.insert(5);
-    // tree.insert(6);
-    // tree.insert(12);
-    // tree.insert(30);
-    // tree.insert(7);
-    // tree.insert(17);
-    // tree.print(tree.root);
+    // Kiel* root = new Kiel;
+    // insertChild(root,"OG","Damon Kiel");
+    // insertChild(root,"Damon Kiel","Donna Kiel");
+    // insertChild(root,"Damon Kiel","Danna Kiel");
+    // insertChild(root,"Danna Kiel","Ali Kiel");
+    // insertChild(root,"Donna Kiel","Ahmed Kiel");
+    // printFam(root);
+    bTrees tree;
+    tree.insert(10);
+    tree.insert(20);
+    tree.insert(5);
+    tree.insert(6);
+    tree.insert(12);
+    tree.insert(30);
+    tree.insert(7);
+    tree.insert(17);
+    tree.print(tree.root);
+    tree.isIn(tree.root,7);
+    tree.isIn(tree.root,35);
+
     
     // return 0;
   // int arr[7]  = {4,2,6,3,5,1,7};

@@ -39,7 +39,7 @@ void insertChild(Kiel* head, string parent, string n){
         while(!q.empty()){ // 3
             vector<Kiel*> checker; 
             int qSize = q.size();
-            for(int i =0; i < qSize; i++){// 1                TreeNode* curr = q.front();
+            for(int i =0; i < qSize; i++){// 1              
                 Kiel* curr = q.front();
                 q.pop();
                 checker.push_back(curr);

@@ -33,13 +33,11 @@ struct student{
     bool online;
 };
 int main() {
-   
     int arr[10] = {389, 409, 999, 2785, 335, 872, 656, 3061, 561, 4000};
     map<int, vector<int> > myMap;
     for(int item : arr){
         myMap[item%10].push_back(item);
     }
-
     for(int i = 0;i < 10;i++){
         if(myMap.count(i)){
             cout<<"("<<i<<") ";
