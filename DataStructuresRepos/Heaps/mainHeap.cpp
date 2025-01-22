@@ -55,20 +55,26 @@ void heapSort(int arr[], int len){
 }
 int main() 
 {    
-  // PQueue p;
-  // int arr[7] = {4,3,8,2,5,7,6};
-  // string meep[7] = {"bob","pat","george","gordon","mop","eobard","clark"};
-  // for(int i = 0;i < 7;i++){
-  //   p.Enqueue(arr[i],meep[i]);
-  // }
-  // p.Dequeue();
-  // p.Dequeue();
+  PQueue p;
+  int arr[7] = {4,3,8,2,5,7,6};
+  // MaxHeap h(arr,7,8);
+  // h.printHeapLin();
+  // cout<<endl<<endl;
+  // h.printHeap();
+  
+  
+  string meep[5] = {"Barry","Iris","Zoom","Wally","Eobard"};
+  for(int i = 0;i < 5;i++){
+    p.Enqueue(arr[i],meep[i]);
+  }
+  p.Dequeue();
+  p.Dequeue();
   // MinHeapP h(arr,7,8);
   // h.DeleteMin();
   // h.printHeap();
-  int arr[8] = {-1,4,3,12,9,5,7,6};
-  heapSort(arr,8);
-  printArray(arr,8);
+  // int arr[8] = {-1,4,3,12,9,5,7,6};
+  // heapSort(arr,8);
+  // printArray(arr,8);
 };
   
 

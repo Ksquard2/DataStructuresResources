@@ -518,7 +518,10 @@ int main()
 
   int arr[6]= {1,2,3,4,5,6};
   NodeI LL(arr,6);
+  LL.prettyPrint();
   LL.rotate(2);
+  cout<<"Rotate by 2:"<<endl;
+  LL.prettyPrint();
   
 //   int Length;
 //  cout<<"How Many Polynomials: ";

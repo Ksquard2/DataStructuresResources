@@ -1,14 +1,24 @@
 #include <iostream>
 using namespace std;
 class NodeI {
+
 public:
   struct Node{
     int data;
     Node* next;
   };
   Node* head =  new Node;
-  int length; //Iterators
+  int length;
   
+
+  
+
+  // Default constructor
+  NodeI()
+  {
+      length = 0;
+      head = NULL;
+  }
 
   bool operator==(NodeI node)
   {
@@ -30,13 +40,6 @@ public:
     return true;
   }
 
-  // Default constructor
-  NodeI()
-  {
-      length = 0;
-      head = NULL;
-  }
-
   // Parameterised Constructor & put item
   NodeI(int data)
   {
@@ -44,20 +47,17 @@ public:
       length = 1;
       head->next = NULL;
   }
-  
-  bool isEmpty()
-  {
-    return length == 0;
+  bool isEmpty(){
+    return head == NULL;
   }
   int len(){
     return length;
   }
-  
-  void append(int val) //transformer
+  void append(int val)
   {   
-      Node* newNode = new Node;
-      newNode->data = val;
-      newNode->next = NULL;
+    Node* newNode = new Node;
+    newNode->data = val;
+    newNode->next = NULL;
     if(isEmpty()){
       head = newNode;
     }
@@ -71,13 +71,12 @@ public:
     }
     length++;
   }
-  NodeI(int arr[], int len)//pass by reference & chaining
+  NodeI(int arr[], int len)//overloaded constructor
   {
     // this->data = arr[0];
     for(int i = 0; i < len; i++){
       append(arr[i]);
-    }
-    
+    }    
     length = len;
   } 
 
@@ -128,8 +127,6 @@ public:
       temp->next = nn;
       length++;
     }
-    
-
   }
 int posOf(int d){
   if(isEmpty()){
@@ -156,7 +153,6 @@ void DeleteVal(int val) //delete items
     {
       Node *prev = NULL;
       Node *curr = head;
-
       while(curr->next != NULL && curr->data != val)
       {
         prev = curr;
@@ -247,7 +243,6 @@ bool IsIn(int d)
 }
 NodeI rotate(int n)
 {
-  prettyPrint();
   if(isEmpty() || !head->next){
     return *this;
   }
@@ -256,7 +251,6 @@ NodeI rotate(int n)
   while (Last->next != nullptr) 
   {
     Last = Last->next;
-
   }
   
   Last->next = head;
@@ -267,7 +261,7 @@ NodeI rotate(int n)
     i--;
   }
   Last->next = nullptr;
-  prettyPrint();
+  // prettyPrint();
   return *this;
 }
 void insertList(NodeI s2, int k) 

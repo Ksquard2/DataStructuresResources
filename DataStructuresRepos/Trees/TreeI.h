@@ -14,8 +14,8 @@ void insert(TreeI* tree, int n)
    {
     TreeI* newRoot = new TreeI;
     newRoot->data = n;
-     tree = newRoot;
-     tree->size++;
+    tree = newRoot;
+    tree->size++;
    } 
    else if (tree->data < n) 
    {
@@ -26,7 +26,6 @@ void insert(TreeI* tree, int n)
        tree->right = newRoot;
        tree->size++;
      }
-
      insert(tree->right, n);
    } 
    else if (tree->data > n) 
@@ -62,7 +61,6 @@ void arrToTree(TreeI* tree, int arr[], int len)
     tree->data = arr[0];
   for(int i = 1; i < len; i++)
   {
-    cout<<arr[i]<<endl;
     insert(tree, arr[i]);
   }
   // prettyPrint(tree);
@@ -150,22 +148,21 @@ int countNodes(TreeI* root) {
 
 void inOrder(TreeI* tree) 
 {
-  if (tree != NULL) 
+  if (tree != nullptr) 
   {
     inOrder(tree->left);
-    cout << tree->data << " ";
+    cout<<tree->data<<" ";
     inOrder(tree->right);
   } 
-
 }
 
 void preOrder (TreeI* tree) 
 {
- if(tree != NULL)
+ if(tree != nullptr)
  {
    cout<<tree->data<<" ";
-    preOrder(tree->left);
-    preOrder(tree->right);
+   preOrder(tree->left);
+   preOrder(tree->right);
  }
 }
 
@@ -221,7 +218,6 @@ void postOrder(TreeI* tree)
     postOrder(tree->right);
     cout<<tree->data<<" ";
   }
- 
 }
 
 int Difference(TreeI* T)
@@ -335,22 +331,6 @@ TreeI* RotateLeftRight(TreeI* T)
   return RotateRight(T);
 }
 
-// bool isavl(TreeI* tree)
-// {
-//   if(abs(Difference(tree)) > 1) 
-//   {
-//     return false;
-//   }
-//   else if(tree == nullptr){
-//     return true;
-//   }
-//   else
-//   {
-//     return isavl(tree->left) && isavl(tree->right);
-//   }
-  
-// }
-
 TreeI* Balance(TreeI* T)
 // Checks and balances the subtree T.
 {
@@ -369,4 +349,16 @@ TreeI* Balance(TreeI* T)
   }
   else
     return T;
+}
+void cloneTree(TreeI* OG, TreeI*& clone) {
+    if (!OG) {
+        clone = nullptr;
+        return;
+    }
+    
+    clone = new TreeI;
+    clone->data = OG->data;
+
+    cloneTree(OG->left, clone->left);
+    cloneTree(OG->right, clone->right);
 }

@@ -48,6 +48,47 @@ void ObubbleSort(int arr[6])
   }
 }
 
+
+void merge(int arr[], int l, int m, int r) {
+  int repSize = r - l;
+  int rep[repSize];
+  int l1 = l;
+  int l2 = m;
+  int index = 0;
+
+  while(l1 < m && l2 < r) {
+    if(arr[l1] < arr[l2]) {
+      rep[index] = arr[l1++];
+    } else {
+      rep[index] = arr[l2++];
+    }
+
+    index++;
+  }
+
+  while(l1 < m) {
+    rep[index++] = arr[l1++];
+  }
+  while(l2 < r) {
+    rep[index++] = arr[l2++];
+  }
+
+  for(int i = 0; i < repSize; i++) {
+    arr[l + i] = rep[i];
+  }
+}
+
+void mergeSort(int arr[], int l, int r) {
+  if(r - l <= 1) {
+    return;
+  }
+
+  int m = l + (r - l) / 2;
+  mergeSort(arr, l, m);
+  mergeSort(arr, m, r);
+
+  merge(arr, l, m, r);
+}
 // void NbubbleSort(int arr[5])
 // {
  
@@ -77,7 +118,6 @@ void SelectionSort(int arr[5])
           if(arr[j] < arr[min])
               min = j;
       }
-      
       int temp = arr[min];
       arr[min] = arr[i];
       arr[i]  = temp;
@@ -317,40 +357,44 @@ unsigned long long int recursion2(unsigned long long int fib)
 int main() 
 {
 
-    int f;
-  cout<<"Enter number to find the value of its fibonacci index: ";
-  cin>>f;
-  cout<<endl;
+  //   int f;
+  // cout<<"Enter number to find the value of its fibonacci index: ";
+  // cin>>f;
+  // cout<<endl;
 
-  int fib = f;
+  // int fib = f;
   
-  auto starti = chrono::high_resolution_clock::now();
+  // auto starti = chrono::high_resolution_clock::now();
   
-  cout<<"The recursive 1 algorithm outputs: "<<recursion(fib)<<endl;
+  // cout<<"The recursive 1 algorithm outputs: "<<recursion(fib)<<endl;
 
-  auto endi = chrono::high_resolution_clock::now();
+  // auto endi = chrono::high_resolution_clock::now();
   
-  cout<<endl;
+  // cout<<endl;
   
-  double speedi = chrono::duration_cast<chrono::nanoseconds>(endi-starti).count();
+  // double speedi = chrono::duration_cast<chrono::nanoseconds>(endi-starti).count();
   
-  cout<<(speedi / 1e+9)<<" seconds of performace time for Fibonacci iteration"<<endl;
+  // cout<<(speedi / 1e+9)<<" seconds of performace time for Fibonacci iteration"<<endl;
 
-  cout<<endl;
+  // cout<<endl;
 
-  auto startr = chrono::high_resolution_clock::now();
+  // auto startr = chrono::high_resolution_clock::now();
   
-  cout<<"The recursive algorithm outputs: "<<recursion2(fib+1)<<endl;
+  // cout<<"The recursive algorithm outputs: "<<recursion2(fib+1)<<endl;
   
-  auto endr = chrono::high_resolution_clock::now();
+  // auto endr = chrono::high_resolution_clock::now();
   
-  cout<<endl;
+  // cout<<endl;
   
-  double speedr = chrono::duration_cast<chrono::nanoseconds>(endr-startr).count();
+  // double speedr = chrono::duration_cast<chrono::nanoseconds>(endr-startr).count();
   
-  cout<<(speedr / 1e+9)<<" seconds of performace time for Fibonacci recursion"<<endl;
+  // cout<<(speedr / 1e+9)<<" seconds of performace time for Fibonacci recursion"<<endl;
 
-  // int arr[6] = {3,890,20,46,31,8};
+  int arr[6] = {3,890,20,46,31,8};
+  mergeSort(arr, 0, 6);
+  for(int i = 0;i < 6;i++){
+    cout<<arr[i]<<" ";
+  }
   // radixsort(arr,6);
 // recurrenceRelation(5);
 // int arr[10] = {-1,-1,-1,-1,-1,-1,-1,-1,-1,-1};

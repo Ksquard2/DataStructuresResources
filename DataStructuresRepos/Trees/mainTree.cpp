@@ -11,7 +11,8 @@
 
 using namespace std;
 
-
+int hello();
+int meep();
 int search(string arr[], int strt, int end, string value)
 {
     int i;
@@ -138,6 +139,7 @@ void printTree2(TreeI* root){
 
 int main() 
 {   
+  hello();
     // Kiel* root = new Kiel;
     // insertChild(root,"OG","Damon Kiel");
     // insertChild(root,"Damon Kiel","Donna Kiel");
@@ -145,24 +147,28 @@ int main()
     // insertChild(root,"Danna Kiel","Ali Kiel");
     // insertChild(root,"Donna Kiel","Ahmed Kiel");
     // printFam(root);
-    bTrees tree;
-    tree.insert(10);
-    tree.insert(20);
-    tree.insert(5);
-    tree.insert(6);
-    tree.insert(12);
-    tree.insert(30);
-    tree.insert(7);
-    tree.insert(17);
-    tree.print(tree.root);
-    tree.isIn(tree.root,7);
-    tree.isIn(tree.root,35);
+    // bTrees tree;
+    // tree.insert(10);
+    // tree.insert(20);
+    // tree.insert(5);
+    // tree.insert(6);
+    // tree.insert(12);
+    // tree.insert(30);
+    // tree.insert(7);
+    // tree.insert(17);
+    // tree.print(tree.root);
+    // tree.isIn(tree.root,30);
+    // tree.isIn(tree.root,35);
 
     
     // return 0;
-  // int arr[7]  = {4,2,6,3,5,1,7};
-  // TreeI* tree1 = new TreeI;
-  // arrToTree(tree1,arr,7);
+  
+  int arr[7]  = {4,2,6,3,5,1,7};
+  TreeI* tree1 = new TreeI;
+  arrToTree(tree1,arr,7);
+  TreeI* clone = new TreeI;
+  cloneTree(tree1,clone);
+  prettyPrint(clone);
   // if(isavl(tree1)){
   //   cout<<"true"<<endl;
   // }
@@ -205,4 +211,14 @@ int main()
   // cout<<"Size: "<<amtNodept2(tree2,0);
 
 
+}
+
+
+int hello(){
+  cout<<"hello"<<endl;
+  return meep();
+}
+int meep(){
+  cout<<"meep"<<endl;
+  return hello();
 }

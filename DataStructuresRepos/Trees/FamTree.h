@@ -12,21 +12,21 @@ struct Kiel{
 };
 
 void insertChild(Kiel* head, string parent, string n){
-            if(parent == "OG"){
-                head->name = n;
-            }
-            if(head->name == parent){
-                head->leaf = false;
-                Kiel* c = new Kiel;
-                c->name = n;
-                head->child.push_back(c);
-            }
-            else if(!head->leaf){
-                for(int i = 0;i < head->child.size();i++){
-                    insertChild(head->child[i],parent,n);
-                }
-            }
+    if(parent == "OG"){
+        head->name = n;
     }
+    if(head->name == parent){
+        head->leaf = false;
+        Kiel* c = new Kiel;
+        c->name = n;
+        head->child.push_back(c);
+    }
+    else if(!head->leaf){
+        for(int i = 0;i < head->child.size();i++){
+            insertChild(head->child[i],parent,n);
+        }
+    }
+ }
 
  vector<vector<Kiel*> > levelOrderFam(Kiel* root) {
         

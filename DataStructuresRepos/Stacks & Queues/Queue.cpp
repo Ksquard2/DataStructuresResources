@@ -11,9 +11,7 @@ class Queue
   public:
     bool isQEmpty()
     {
- 
       return rear == front;
-
     }
     bool isQFull()
     {

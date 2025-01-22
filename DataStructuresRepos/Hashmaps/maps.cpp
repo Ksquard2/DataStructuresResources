@@ -34,19 +34,28 @@ struct student{
 };
 int main() {
     int arr[10] = {389, 409, 999, 2785, 335, 872, 656, 3061, 561, 4000};
-    map<int, vector<int> > myMap;
-    for(int item : arr){
-        myMap[item%10].push_back(item);
+    map<char, vector<char> > myMap;
+    myMap['A'].push_back('B');
+    myMap['A'].push_back('C');
+    myMap['C'].push_back('D');
+    myMap['B'].push_back('D');
+  
+    cout<<'A'<<": ";
+    for(char item : myMap['A']){
+        cout<<item<<" ";
     }
-    for(int i = 0;i < 10;i++){
-        if(myMap.count(i)){
-            cout<<"("<<i<<") ";
-            for(int item : myMap[i]){
-                cout<<item<<" ";
-            }
-            cout<<endl;
-        }
+    cout<<endl;
+     cout<<'B'<<": ";
+    for(char item : myMap['B']){
+        cout<<item<<" ";
     }
+    cout<<endl;
+    cout<<'C'<<": ";
+    for(char item : myMap['C']){
+        cout<<item<<" ";
+    }
+    cout<<endl;
+    
 
 
 

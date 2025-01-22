@@ -1,6 +1,6 @@
 #include <iostream>
 #include <math.h>
-#include "MinHeapP.h"
+#include "MaxHeapP.h"
 #include <map>
 using namespace std;
 
@@ -8,7 +8,7 @@ using namespace std;
 
 class PQueue{
   public:
-    MinHeapP h;
+    MaxHeapP h;
     map<int, string> people;
     int index;
     PQueue() : h(8){
@@ -22,10 +22,11 @@ class PQueue{
     }
     void Enqueue(int priority, string name){
       if(people.find(priority) == people.end()){
-        cout<<name<<" has been added to this list"<<endl;
+        
         h.insert(priority);
         people[priority] = name;
-        cout<<people[h.getArray()[1]]<<" is now in the front of the line."<<endl;
+        cout<<people[h.getArray()[1]]<<" is in the front of the line."<<endl;
+        cout<<" - "<<name<<"("<<priority<<") has been added to the list"<<endl;
     
       }
       else{
@@ -33,10 +34,10 @@ class PQueue{
       }
     }
     void Dequeue(){
-        string meep = people[h.arr[index]];
+        string meep = people[h.arr[1]];
         cout<<meep<<" has just left the line."<<endl;
 
-        h.DeleteMin();
+        h.DeleteMax(1);
         index++;
         // string gord = people[h.arr[index]];
         // cout<<gord<<" is now in the front of the line."<<endl;
