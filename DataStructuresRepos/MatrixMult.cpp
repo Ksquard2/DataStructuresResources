@@ -3,99 +3,120 @@
 #include <cmath>
 using namespace std;
 
+double e(double po)
+{
 
-
-double e(double po){
-    
     double e_approx = 1.0;
     double factorial = 1.0;
-    for (int i = 1; i < 20; ++i) {
+    for (int i = 1; i < 20; ++i)
+    {
         factorial *= i;
         e_approx += 1.0 / factorial;
     }
     return pow(e_approx, po);
 }
-double sumE(int index){
+double sumE(int index)
+{
     double result = 0.0;
-    for(int i = 1; i <= index;i++){
-        result+=e(i);
+    for (int i = 1; i <= index; i++)
+    {
+        result += e(i);
     }
     return result;
 }
-double softMax(double exp){
-  
+double softMax(vector<double> i, vector<double> w, int one, int two)
+{
+    double hall = e(-1.0*( (w[one]*i[one]) + (w[two]*i[two]) ));
+    double result = 1.0/(1.0+hall);
+    return result;
 }
-double sigmoid(double x){
-    double answer = 1.0/(1.0+e(x*-1.0));
+double sigmoid(double x)
+{
+    double answer = 1.0 / (1.0 + e(x * -1.0));
     return answer;
 }
-void forwardProp(double start, vector<double> weights,vector<double> bias)
+void forwardProp(double start, vector<double> weights, vector<double> bias)
 {
     vector<double> answer;
-    cout<<"input layer: "<<start<<endl;
-    for(int i = 0;i < weights.size();i++){
-        start*=weights[i];
-        start+=bias[i];
-        cout<<"pre sigmoid: "<<start<<endl;
+    cout << "input layer: " << start << endl;
+    for (int i = 0; i < weights.size(); i++)
+    {
+        start *= weights[i];
+        start += bias[i];
+        cout << "pre sigmoid: " << start << endl;
         start = sigmoid(start);
-        cout<<"post sigmoid: "<<start<<endl;
+        cout << "post sigmoid: " << start << endl;
     }
     double y = start - .9;
-    double loss = (y*y)/2;
-    cout<<"Loss: "<<loss<<endl;
+    double loss = (y * y) / 2;
+    cout << "Loss: " << loss << endl;
 }
 
-int singleMult(vector<int> matrix1,vector<vector<int> > matrix2,int col){
+int singleMult(vector<int> matrix1, vector<vector<int> > matrix2, int col)
+{
     int sum = 0;
-    for(int i = 0;i < matrix1.size();i++)
+    for (int i = 0; i < matrix1.size(); i++)
     {
-        sum+=(matrix1[i]*matrix2[i][col]);
+        sum += (matrix1[i] * matrix2[i][col]);
     }
     return sum;
 }
 
-vector<vector<int> > matrixMulti(vector<vector<int> >matrix1, vector<vector<int> > matrix2){
+vector<vector<int> > matrixMulti(vector<vector<int> > matrix1, vector<vector<int> > matrix2)
+{
     vector<vector<int> > answer;
-    for(int i = 0;i < matrix1.size();i++){
+    for (int i = 0; i < matrix1.size(); i++)
+    {
         vector<int> v;
-        for(int j = 0;j < matrix1.size();j++){
-            int sum = singleMult(matrix1[i],matrix2,j);
+        for (int j = 0; j < matrix1.size(); j++)
+        {
+            int sum = singleMult(matrix1[i], matrix2, j);
             v.push_back(sum);
         }
         answer.push_back(v);
     }
     return answer;
 }
-void printMatrix(vector<vector<int> >matrix){
-    for(int i = 0;i < matrix.size();i++){
-        for(int j = 0;j < matrix[i].size();j++){
-            cout<<matrix[i][j]<<" ";
+void printMatrix(vector<vector<double> > matrix)
+{
+    for (int i = 0; i < matrix.size(); i++)
+    {
+        for (int j = 0; j < matrix[i].size(); j++)
+        {
+            cout << matrix[i][j] << " ";
         }
-        cout<<endl;
+        cout << endl;
     }
-    
 }
-vector<double> forwardProp2(vector<double> start, vector<double> weights)
+vector<double> forwardProp2(vector<double> start, vector<double> weights, vector<double> bias)
 {
     vector<double> hidden;
     double val = 0.0;
-    for(int i = 0;i < weights.size();i=i+start.size()){
-        for(int j = 0;j < start.size();j++){
-            val+=(start[j]*weights[j+i]);
+    int bindex = 0;
+    for(int i = 0; i < weights.size(); i = i + start.size()) 
+    {
+        for(int j = 0; j < start.size(); j++)
+        {
+            val += ((start[j] * (weights[j + i]+bias[bindex])));
         }
-        cout<<"Value: "<<val<<endl;
-        hidden.push_back(val);
+        hidden.push_back(sigmoid(val));
         val = 0.0;
-        if(hidden.size() == start.size()){
+        if(hidden.size() == start.size())
+        {
+
             start = hidden;
-            cout<<hidden[0]<<endl<<hidden[1]<<endl;
+            cout << "1: " << hidden[0] << endl << "2: " << hidden[1] << endl;
             hidden.clear();
+            bindex++;
         }
     }
     return start;
 }
 int main()
 {
+    vector<double> bias;
+    bias.push_back(.35);
+    bias.push_back(.6);
     vector<double> start;
     start.push_back(.5);
     start.push_back(.1);
@@ -108,43 +129,27 @@ int main()
     weights.push_back(.45);
     weights.push_back(.5);
     weights.push_back(.55);
-    forwardProp2(start,weights);
+    forwardProp2(start, weights,bias);
 
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-    
-// cout << "Approximation of e: " << e_approx << endl;
-// vector<int> line1;
-// line1.push_back(3);
-// line1.push_back(5);
-// line1.push_back(1);
-// vector<vector<int> > m1;
-// m1.push_back(line1);
-// m1.push_back(line1);
-// vector<int> line;
-// vector<vector<int> > m2;
-// line.push_back(2);
-// line.push_back(4);
-// m2.push_back(line);
-// m2.push_back(line);
-// m2.push_back(line);
-// cout<<"Matrix 1: "<<endl;
-// printMatrix(m1);
-// cout<<"Matrix 2: "<<endl;
-// printMatrix(m2);
-// cout<<"Matrix Multiplication: "<<endl;
-// printMatrix(matrixMulti(m1,m2));
+    // cout << "Approximation of e: " << e_approx << endl;
+    // vector<int> line1;
+    // line1.push_back(3);
+    // line1.push_back(5);
+    // line1.push_back(1);
+    // vector<vector<int> > m1;
+    // m1.push_back(line1);
+    // m1.push_back(line1);
+    // vector<int> line;
+    // vector<vector<int> > m2;
+    // line.push_back(2);
+    // line.push_back(4);
+    // m2.push_back(line);
+    // m2.push_back(line);
+    // m2.push_back(line);
+    // cout<<"Matrix 1: "<<endl;
+    // printMatrix(m1);
+    // cout<<"Matrix 2: "<<endl;
+    // printMatrix(m2);
+    // cout<<"Matrix Multiplication: "<<endl;
+    // printMatrix(matrixMulti(m1,m2));
 }
