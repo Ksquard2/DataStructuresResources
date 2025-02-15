@@ -139,14 +139,23 @@ void printTree2(TreeI* root){
 
 int main() 
 {   
-  hello();
-    // Kiel* root = new Kiel;
-    // insertChild(root,"OG","Damon Kiel");
-    // insertChild(root,"Damon Kiel","Donna Kiel");
-    // insertChild(root,"Damon Kiel","Danna Kiel");
-    // insertChild(root,"Danna Kiel","Ali Kiel");
-    // insertChild(root,"Donna Kiel","Ahmed Kiel");
-    // printFam(root);
+    Kiel* root = new Kiel;
+    insertChild(root,"OG","Damon Kiel");
+    insertChild(root,"Damon Kiel","Donna Kiel");
+    insertChild(root,"Damon Kiel","Danna Kiel");
+    insertChild(root,"Danna Kiel","Ali Kiel");
+    insertChild(root,"Donna Kiel","Ahmed Kiel");
+    printFam(root);
+
+
+
+
+
+
+
+
+
+    
     // bTrees tree;
     // tree.insert(10);
     // tree.insert(20);
@@ -163,12 +172,12 @@ int main()
     
     // return 0;
   
-  int arr[7]  = {4,2,6,3,5,1,7};
-  TreeI* tree1 = new TreeI;
-  arrToTree(tree1,arr,7);
-  TreeI* clone = new TreeI;
-  cloneTree(tree1,clone);
-  prettyPrint(clone);
+  // int arr[7]  = {4,2,6,3,5,1,7};
+  // TreeI* tree1 = new TreeI;
+  // arrToTree(tree1,arr,7);
+  // TreeI* clone = new TreeI;
+  // cloneTree(tree1,clone);
+  // prettyPrint(clone);
   // if(isavl(tree1)){
   //   cout<<"true"<<endl;
   // }

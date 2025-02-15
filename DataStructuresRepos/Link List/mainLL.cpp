@@ -513,14 +513,30 @@ NodePoly *MultiplyPolynomials(string arr[], int Length)
   return answer;
 }
 
+NodeI reverseList(){
+
+    Node* curr = head;
+    NodeI prev;
+    Node* next;
+    while (curr != nullptr) {
+        // Step 1: Store next
+        next = curr->next;
+        // Step 2: Reverse current node's next pointer
+        curr->next = prev.head;
+        // Step 3: Move pointers one position ahead
+        prev.head = curr;
+        curr = next;
+    }
+      // Return the head of reversed linked list
+    return prev;
+}
+
 int main() 
 {
 
   int arr[6]= {1,2,3,4,5,6};
   NodeI LL(arr,6);
-  LL.prettyPrint();
-  LL.rotate(2);
-  cout<<"Rotate by 2:"<<endl;
+  reverseList(LL);
   LL.prettyPrint();
   
 //   int Length;

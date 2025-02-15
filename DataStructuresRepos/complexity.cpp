@@ -43,7 +43,7 @@ void ObubbleSort(int arr[6])
     printArray(arr);
     if(tracker == 0)
     {
-        break;
+      break;
     }
   }
 }
@@ -55,24 +55,24 @@ void merge(int arr[], int l, int m, int r) {
   int l1 = l;
   int l2 = m;
   int index = 0;
-
-  while(l1 < m && l2 < r) {
-    if(arr[l1] < arr[l2]) {
+  while(l1 < m && l2 < r) 
+  {
+    if(arr[l1] < arr[l2]) 
+    {
       rep[index] = arr[l1++];
-    } else {
+    } 
+    else 
+    {
       rep[index] = arr[l2++];
     }
-
     index++;
   }
-
   while(l1 < m) {
     rep[index++] = arr[l1++];
   }
   while(l2 < r) {
     rep[index++] = arr[l2++];
   }
-
   for(int i = 0; i < repSize; i++) {
     arr[l + i] = rep[i];
   }
@@ -89,24 +89,6 @@ void mergeSort(int arr[], int l, int r) {
 
   merge(arr, l, m, r);
 }
-// void NbubbleSort(int arr[5])
-// {
- 
-//   for(int i = 0;i < 5;i++)
-//   {
-
-//     for(int j = 0;j < 5-i-1;j++)
-//     {
-//         if(arr[j] > arr[j+1])
-//         {  
-//             int temp = arr[j];
-//             arr[j] = arr[j+1];
-//             arr[j+1] = temp;
-//         } 
-//     }  
-//     printArray(arr);
-//   }
-// }
 
 void SelectionSort(int arr[5])
 {
@@ -164,36 +146,8 @@ void insertion(int arr[10], int val) //Sorted Lists
     printArray(arr); 
 
 }
-void merge(int arr1[4], int arr2[4], int res[8])
-{  
-    int index1 = 0;
-    int index2 = 0;
-    int indexr = 0;
-    while(indexr <= 8)
-    {
-      if(res[7] != 0)
-      {
-        break;
-      }
-      if(arr1[index1] <= arr2[index2])
-      {
-        res[indexr] = arr1[index1];
-        index1++;
-        indexr++;
-      }
-      else
-      {
-        res[indexr] = arr2[index2];
-        index2++;
-        indexr++;
-        // cout<<arr2[index2]<<endl;
-      }
-      printArray(res);
-    }
-    
-}
 
-void BubbleSort(int arr[5])
+void NOBubbleSort(int arr[5])
 {
   cout<<"Orignal List: ";
   printArray(arr);

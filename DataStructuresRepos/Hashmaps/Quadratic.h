@@ -34,7 +34,6 @@ class QHash {
     }
     void insert(int x){
         insertHelper(x,x%10);
-        printHash();
     }
     void DELETE(int key){
         map[key] = -1;

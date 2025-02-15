@@ -5,6 +5,9 @@
 #include "Quadratic.h"
 #include "Double.h"
 #include <set>
+#include <bitset>
+#include <cstdlib>
+#include <ctime>
 using namespace std;
 
 class town {
@@ -32,48 +35,90 @@ struct student{
     string major;
     bool online;
 };
+
+void largestNumber(int list[5][5]){
+    for(int nest = 0;nest < 5;nest++)
+    {
+        int max = 0;
+        for(int index = 0;index < 5;index++)
+        {
+            if(max < list[nest][index])
+            {
+                max = list[nest][index];
+            }
+        }
+        cout<<"Row "<<nest+1<<": "<<max<<endl;
+    }
+    cout<<endl;
+    for(int nest = 0;nest < 5;nest++)
+    {
+        int min = list[0][nest];
+        for(int index = 0;index < 5;index++)
+        {
+            if(min > list[index][nest])
+            {
+                min = list[index][nest];
+            }
+        }
+        cout<<"Col "<<nest+1<<": "<<min<<endl;
+    }
+}
 int main() {
-    int arr[10] = {389, 409, 999, 2785, 335, 872, 656, 3061, 561, 4000};
-    map<char, vector<char> > myMap;
-    myMap['A'].push_back('B');
-    myMap['A'].push_back('C');
-    myMap['C'].push_back('D');
-    myMap['B'].push_back('D');
+int arr[5][5];
+srand(time(0)); // Seed the random number generator
+for(int nest = 0;nest < 5;nest++)
+{
+    for(int index = 0;index < 5;index++){
+        int random_number = rand() % 100 + 1;   
+        arr[nest][index] = random_number;
+        cout<<random_number<<" ";
+    }
+    cout<<endl;
+}
+largestNumber(arr);
+
+
+
+
+
+
+
+
+
+
+
+
+    // int x = 18;
+    // cout << bitset<16>(x) << endl;
+    // QHash myMap;
+    // int arr[8] = {23,34,63,55,48,14,94,74};
+    // for(int item : arr){
+    //     myMap.insert(item);
+    // }
+    // myMap.printHash();
+    // int arr[10] = {389, 409, 999, 2785, 335, 872, 656, 3061, 561, 4000};
+    // map<char, vector<char> > myMap;
+    // myMap['A'].push_back('B');
+    // myMap['A'].push_back('C');
+    // myMap['C'].push_back('D');
+    // myMap['B'].push_back('D');
   
-    cout<<'A'<<": ";
-    for(char item : myMap['A']){
-        cout<<item<<" ";
-    }
-    cout<<endl;
-     cout<<'B'<<": ";
-    for(char item : myMap['B']){
-        cout<<item<<" ";
-    }
-    cout<<endl;
-    cout<<'C'<<": ";
-    for(char item : myMap['C']){
-        cout<<item<<" ";
-    }
-    cout<<endl;
+    // cout<<'A'<<": ";
+    // for(char item : myMap['A']){
+    //     cout<<item<<" ";
+    // }
+    // cout<<endl;
+    //  cout<<'B'<<": ";
+    // for(char item : myMap['B']){
+    //     cout<<item<<" ";
+    // }
+    // cout<<endl;
+    // cout<<'C'<<": ";
+    // for(char item : myMap['C']){
+    //     cout<<item<<" ";
+    // }
+    // cout<<endl;
     
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
     // map<int,int> myMap;
     // vector<int> v;
     // set<int> mySet;

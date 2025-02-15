@@ -5,6 +5,7 @@ class Sorted{
     public:
     struct sort
     {
+      string name;
       int data;
       sort* next;
     };
@@ -21,10 +22,11 @@ class Sorted{
     bool isEmpty(){
         return size == 0;
     }
-    void insert(int val)
+    void insert(int val,string n)
     {
         sort* nn;
         nn->data = val;
+        nn->name = n;
         if(isEmpty())
         {
             head = nn;
@@ -51,5 +53,32 @@ class Sorted{
             }
         }
         
+    }
+    void DeleteVal(int val) //delete items
+    {
+        if(isEmpty())
+        {
+            cout<<"List is empty"<<endl;
+        }
+        else
+        {
+            sort *prev = NULL;
+            sort *curr = head;
+            while(curr->next != NULL && curr->data != val)
+            {
+                prev = curr;
+                curr = curr->next;
+            }
+            if(curr->next != nullptr)
+            {
+                prev->next = curr->next;
+                curr->next = nullptr;
+                size--;
+            }
+            else
+            {
+                cout<<"Not in the list"<<endl;
+            }
+        }
     }
 };

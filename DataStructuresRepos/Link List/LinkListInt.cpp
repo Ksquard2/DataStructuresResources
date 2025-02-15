@@ -1,12 +1,13 @@
 #include <iostream>
 using namespace std;
-class NodeI {
-
-public:
   struct Node{
     int data;
     Node* next;
   };
+class NodeI {
+
+public:
+
   Node* head =  new Node;
   int length;
   
@@ -73,8 +74,8 @@ public:
   }
   NodeI(int arr[], int len)//overloaded constructor
   {
-    // this->data = arr[0];
-    for(int i = 0; i < len; i++){
+    for(int i = 0; i < len; i++)
+    {
       append(arr[i]);
     }    
     length = len;
@@ -96,14 +97,12 @@ public:
         temp = temp->next;
       }
       cout<<endl;
-  
   }
-
-
+  
   void insertAt(int val, int pos)
   {
-      Node* nn = new Node;
-      nn->data = val;
+    Node* nn = new Node;
+    nn->data = val;
     if(pos > length){
       cout<<"Invalid position"<<endl;
     }
@@ -307,23 +306,21 @@ void deleteAll(int val)
     }
   }
 }
+NodeI reverseList(){
 
-NodeI reverseList() {
     Node* curr = head;
     NodeI prev;
     Node* next;
     while (curr != nullptr) {
-        // Step 1: Store next
         next = curr->next;
-        // Step 2: Reverse current node's next pointer
         curr->next = prev.head;
-        // Step 3: Move pointers one position ahead
         prev.head = curr;
         curr = next;
     }
-      // Return the head of reversed linked list
     return prev;
 }
+
+
 };
  
 
