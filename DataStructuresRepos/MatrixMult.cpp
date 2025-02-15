@@ -15,6 +15,16 @@ double e(double po){
     }
     return pow(e_approx, po);
 }
+double sumE(int index){
+    double result = 0.0;
+    for(int i = 1; i <= index;i++){
+        result+=e(i);
+    }
+    return result;
+}
+double softMax(double exp){
+  
+}
 double sigmoid(double x){
     double answer = 1.0/(1.0+e(x*-1.0));
     return answer;
@@ -65,7 +75,8 @@ void printMatrix(vector<vector<int> >matrix){
     }
     
 }
-void forwardProp2(vector<double> start, vector<double> weights){
+vector<double> forwardProp2(vector<double> start, vector<double> weights)
+{
     vector<double> hidden;
     double val = 0.0;
     for(int i = 0;i < weights.size();i=i+start.size()){
@@ -73,7 +84,7 @@ void forwardProp2(vector<double> start, vector<double> weights){
             val+=(start[j]*weights[j+i]);
         }
         cout<<"Value: "<<val<<endl;
-        hidden.push_back(sigmoid(val));
+        hidden.push_back(val);
         val = 0.0;
         if(hidden.size() == start.size()){
             start = hidden;
@@ -81,6 +92,7 @@ void forwardProp2(vector<double> start, vector<double> weights){
             hidden.clear();
         }
     }
+    return start;
 }
 int main()
 {
