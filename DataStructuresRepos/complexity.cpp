@@ -73,7 +73,8 @@ void merge(int arr[], int l, int m, int r) {
   while(l2 < r) {
     rep[index++] = arr[l2++];
   }
-  for(int i = 0; i < repSize; i++) {
+  for(int i = 0; i < repSize; i++) 
+  {
     arr[l + i] = rep[i];
   }
 }
@@ -257,17 +258,20 @@ int binarySearchI(int arr[], int low, int high, int val){
   return -1;
 }
 
-int findSortedMin(int arr[6],int l, int r){
+int findRotatedMin(int arr[6],int l, int r)
+{
   int m = (l+r)/2;
-  if(l == r){
+  if(l == r)
+  {
     return arr[l];
   }
-  else if(arr[m] > arr[r]){
-    return findSortedMin(arr, m+1,r);
+  else if(arr[m] > arr[r])
+  {
+    return findRotatedMin(arr, m+1,r);
   }
   else
   {
-    return findSortedMin(arr,l,m);
+    return findRotatedMin(arr,l,m);
   }
 }
 

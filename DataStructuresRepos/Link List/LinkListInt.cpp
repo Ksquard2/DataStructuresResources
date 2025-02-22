@@ -98,7 +98,7 @@ public:
       }
       cout<<endl;
   }
-  
+
   void insertAt(int val, int pos)
   {
     Node* nn = new Node;
@@ -128,7 +128,8 @@ public:
     }
   }
 int posOf(int d){
-  if(isEmpty()){
+  if(isEmpty())
+  {
     return -1;
   }
   Node* temp = head;

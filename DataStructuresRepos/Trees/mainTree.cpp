@@ -81,30 +81,34 @@ void UIExperience(TreeS* root,vector<string>& s){
 }
 vector<vector<int> > levelOrder(TreeI* root) {
         
-        queue<TreeI*> q;
-        vector<vector<int> > lorder;
-        if(!root) {
-            return lorder;
-        }
-        q.push(root);
-        while(!q.empty()){ // 3
-            vector<int> checker; 
-            int qSize = q.size();
-            for(int i =0; i < qSize; i++){// 1                TreeNode* curr = q.front();
-                TreeI* curr = q.front();
-                q.pop();
-                checker.push_back(curr->data);
-                if(curr->left){
-                    q.push(curr->left);
-                }
-                if(curr->right){
-                    q.push(curr->right); 
-                }
-            }
-            lorder.push_back(checker);  
-        }
-       return lorder;
-     }
+  queue<TreeI*> q;
+  vector<vector<int> > lorder;
+  if(!root) {
+      return lorder;
+  }
+  q.push(root);
+  while(!q.empty())
+  {
+      vector<int> checker; 
+      int qSize = q.size();
+      for(int i =0; i < qSize; i++)
+      {
+          TreeI* curr = q.front();
+          q.pop();
+          checker.push_back(curr->data);
+          if(curr->left)
+          {
+              q.push(curr->left);
+          }
+          if(curr->right)
+          {
+              q.push(curr->right); 
+          }
+      }
+      lorder.push_back(checker);  
+  }
+  return lorder;
+}
 string spaces(int x){
   string s = "";
   for(int i = 0;i < x;i++){
@@ -156,6 +160,9 @@ int main()
 
 
     
+
+
+
     // bTrees tree;
     // tree.insert(10);
     // tree.insert(20);
