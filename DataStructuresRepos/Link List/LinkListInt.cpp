@@ -7,13 +7,8 @@ using namespace std;
 class NodeI {
 
 public:
-
   Node* head =  new Node;
   int length;
-  
-
-  
-
   // Default constructor
   NodeI()
   {
@@ -79,6 +74,7 @@ public:
       append(arr[i]);
     }    
     length = len;
+    head = head->next;
   } 
 
   void prettyPrint()
@@ -116,17 +112,19 @@ public:
       length++;
     }
     else{
-      
       Node* temp = head;
-      while(pos > 1){
+      for(int i = 0;i < pos;i++)
+      {
+        if(!temp){
+          return;
+        }
         temp = temp->next;
-        pos--;
       }
       nn->next = temp->next;
       temp->next = nn;
-      length++;
-    }
   }
+}
+
 int posOf(int d){
   if(isEmpty())
   {

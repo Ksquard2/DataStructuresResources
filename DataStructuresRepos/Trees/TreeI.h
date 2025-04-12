@@ -1,11 +1,19 @@
 #include <iostream>
+#include <vector>
 using namespace std;
 
-struct TreeI{
-    int data;
-    TreeI* right = NULL;
-    TreeI* left = NULL;
-    int size = 0;
+struct TreeI {
+  int data;
+  TreeI* right;
+  TreeI* left;
+  int height;  // new height field (starts at 1 for leaf)
+  int size;  // keeping this in case you’re using it elsewhere
+  TreeI(){
+    right = nullptr;
+    left = nullptr;
+    height = 1;  // new height field (starts at 1 for leaf)
+    size = 0;
+  }
 };
 
 void insert(TreeI* tree, int n) 
@@ -26,7 +34,7 @@ void insert(TreeI* tree, int n)
        tree->right = newRoot;
        tree->size++;
      }
-     insert(tree->right, n);
+     else insert(tree->right, n);
    } 
    else if (tree->data > n) 
    {
@@ -37,8 +45,7 @@ void insert(TreeI* tree, int n)
        tree->left = newRoot;
        tree->size++;
      }
-   
-     insert(tree->left, n);
+    else insert(tree->left, n);
    }
  }
 
@@ -58,13 +65,15 @@ void prettyPrint(TreeI* tree, int depth = 0)
 
 void arrToTree(TreeI* tree, int arr[], int len)
 {
-    tree->data = arr[0];
+  tree->data = arr[0];
   for(int i = 1; i < len; i++)
   {
     insert(tree, arr[i]);
   }
   // prettyPrint(tree);
 }
+
+
 
 // TreeI* arrToTreeS(int arr[], int size)
 // {
@@ -96,26 +105,7 @@ bool isIn(TreeI* tree, int val)
   
 }
 
-int height(TreeI* tree)
-{
-  if(tree == NULL)
-  {
-    return 0;
-  }
-  else
-  {
-    int leftHeight = height(tree->left);
-    int rightHeight = height(tree->right);
-    if(leftHeight > rightHeight)
-    {
-      return leftHeight + 1;
-    }
-    else
-    {
-      return rightHeight + 1;
-    }
-  }
-}
+
 void countNodesHelper(TreeI* root, int& counter) {
   if (root == NULL) {
     return;
@@ -209,8 +199,6 @@ void orderIn(TreeI* tree)
     orderIn(tree->right);
   }
 }
-
-
 void postOrder(TreeI* tree)
 {
   if(tree != nullptr){
@@ -220,25 +208,21 @@ void postOrder(TreeI* tree)
   }
 }
 
-int Difference(TreeI* T)
-{
-  return abs(height(T->left) - height(T->right));
-}
-bool isavl(TreeI* tree)
-{
-  if(tree == nullptr){
-    return true;
-  }
-  else if(abs(Difference(tree)) > 1) 
-  {
-    cout<<tree->data<<endl;
-    return false;
-  }
-  else
-  {
-    return isavl(tree->left) && isavl(tree->right);
-  }
-}
+// bool isavl(TreeI* tree)
+// {
+//   if(tree == nullptr){
+//     return true;
+//   }
+//   else if(abs(Difference(tree)) > 1) 
+//   {
+//     cout<<tree->data<<endl;
+//     return false;
+//   }
+//   else
+//   {
+//     return isavl(tree->left) && isavl(tree->right);
+//   }
+// }
 
 
 
@@ -268,22 +252,18 @@ bool isBST(TreeI* tree)
   }
   else
   {
-    if((tree->left != nullptr && tree->left->data <= tree->data) && 
-        tree->right == nullptr)
+    if((tree->left != nullptr && tree->left->data <= tree->data) && tree->right == nullptr)
     {
-        return isBST(tree->left);   
+      return isBST(tree->left);   
     }
-    else if((tree->right != nullptr && tree->right->data >= tree->data) && 
-        tree->left == nullptr)
+    else if((tree->right != nullptr && tree->right->data >= tree->data) && tree->left == nullptr)
     {
         return isBST(tree->right);   
     }
-    else if((tree->left != nullptr && tree->left->data <= tree->data) && 
-      (tree->right != nullptr && tree->right->data >= tree->data))
+    else if((tree->left != nullptr && tree->left->data <= tree->data) && (tree->right != nullptr && tree->right->data >= tree->data))
     {
-        return isBST(tree->left) && isBST(tree->right);
+      return isBST(tree->left) && isBST(tree->right);
     }
- 
     else
     {
       return false;
@@ -291,14 +271,31 @@ bool isBST(TreeI* tree)
   }
 }
   
-
+int getHeight(TreeI* node) {
+  if(node){
+    return node->height;
+  }  
+  else{
+    return 0;
+  }
+}
+void updateHeight(TreeI* node) {
+  if (node){
+    node->height = 1 + max(getHeight(node->left), getHeight(node->right));
+  }
+      
+}
+int getBalance(TreeI* node) {
+  return node ? getHeight(node->left) - getHeight(node->right) : 0;
+}
 TreeI* RotateRight(TreeI* tree)
 {
   TreeI* R = tree->left;
   TreeI* L = R->right;
   R->right = tree;
   tree->left = L;
-  cout << "Rotates Right" << endl;
+  updateHeight(tree);
+  updateHeight(R);
   return R;
 }
 
@@ -309,7 +306,8 @@ TreeI* RotateLeft(TreeI* tree)
   TreeI* B = S->left;
   S->left = tree;
   tree->right = B;
-  cout << "Rotates Left" << endl;
+  updateHeight(tree);
+  updateHeight(S);
   return S;
 }
 
@@ -318,7 +316,6 @@ TreeI* RotateRightLeft(TreeI* T)
 {
   TreeI* S = T->right;
   T->right = RotateRight(S);
-  cout<< "Rotates RightLeft" << endl;
   return RotateLeft(T);
 }
 
@@ -327,28 +324,75 @@ TreeI* RotateLeftRight(TreeI* T)
 {
   TreeI* S = T->left;
   T->left = RotateLeft(S);
-  cout<< "Rotates LeftRight" << endl;
   return RotateRight(T);
 }
 
-TreeI* Balance(TreeI* T)
-// Checks and balances the subtree T.
-{
-  int balanceFactor = Difference(T);
+TreeI* Balance(TreeI* T) {
+  int balanceFactor = getBalance(T);
+
   if (balanceFactor > 1) {
-    if (Difference(T->left) > 1)
-      return RotateRight(T);
+    // Left-heavy
+    if (getBalance(T->left) >= 0)
+      return RotateRight(T);       // Left-Left
     else
-      return RotateLeftRight(T);
+      return RotateLeftRight(T);   // Left-Right
   }
   else if (balanceFactor < -1) {
-    if (Difference(T->right) < 0)
-      return RotateLeft(T);
+    // Right-heavy
+    if (getBalance(T->right) <= 0)
+      return RotateLeft(T);        // Right-Right
     else
-      return RotateRightLeft(T);
+      return RotateRightLeft(T);   // Right-Left
   }
-  else
-    return T;
+
+  return T; // Already balanced
+}
+
+TreeI* InsertAVL(TreeI* root, int value) {
+  if (root == nullptr) {
+      TreeI* newNode = new TreeI;
+      newNode->data = value;
+      return newNode;
+  }
+
+  if (value < root->data){
+    root->left = InsertAVL(root->left, value);
+  }
+  else if (value > root->data){
+    root->right = InsertAVL(root->right, value);
+  } 
+  else{
+    return root; 
+  }
+  updateHeight(root);           // Update height after insertion
+  return Balance(root);         // Balance the node if needed
+}
+
+TreeI* vecToTree(vector<int>& arr){
+  TreeI* tree = nullptr;
+  for(int i = 0; i < arr.size(); i++)
+  {
+    tree = InsertAVL(tree, arr[i]);
+  }
+  return tree;
+}
+
+void inOrderV(vector<int>& meep, TreeI* root){
+  if(root == NULL){
+      return;
+  }
+  else{
+    inOrderV(meep,root -> left);
+    meep.push_back(root -> data); 
+    inOrderV(meep, root -> right);
+       
+  }
+}
+vector<int> treeSort(vector<int>& arr){
+  TreeI* root = vecToTree(arr);
+  vector<int> answer;
+  inOrderV(answer, root);
+  return answer;
 }
 void cloneTree(TreeI* OG, TreeI*& clone) {
     if (!OG) {

@@ -333,38 +333,38 @@ int main()
     //         cout<<endl;
     //     }
     // }
-//   int n = 4; // Ensure n is a power of 2 for simplicity
-//     vector<vector<int> > A;
-//     vector<vector<int> > B;
-//     vector<int> input;
-//     for(int i = 1;i <= 16;i++){
-//         int random_number = rand() % 9 + 1; 
-//         input.push_back(random_number);
-//         if(i%4 == 0){
-//             A.push_back(input);
-//             input.clear();
-//         }
-//     }
-//     for(int i = 1;i <= 16;i++){
-//         int random_number = rand() % 9 + 1; 
-//         input.push_back(random_number);
-//         if(i%4 == 0){
-//             B.push_back(input);
-//             input.clear();
-//         }
-//     }
-//     cout << "Matrix A:" << endl;
-//     printMatrix(A);
-//     cout << "\nMatrix B:" << endl;
-//     printMatrix(B);
+  int n = 4; // Ensure n is a power of 2 for simplicity
+    vector<vector<int> > A;
+    vector<vector<int> > B;
+    vector<int> input;
+    for(int i = 1;i <= 16;i++){
+        int random_number = rand() % 9 + 1; 
+        input.push_back(random_number);
+        if(i%4 == 0){
+            A.push_back(input);
+            input.clear();
+        }
+    }
+    for(int i = 1;i <= 16;i++){
+        int random_number = rand() % 9 + 1; 
+        input.push_back(random_number);
+        if(i%4 == 0){
+            B.push_back(input);
+            input.clear();
+        }
+    }
+    cout << "Matrix A:" << endl;
+    printMatrix(A);
+    cout << "\nMatrix B:" << endl;
+    printMatrix(B);
 
-//     vector<vector<int> > C = multiply(A, B);
-//     vector<vector<int> > D = matrixMulti(A,B);
+    vector<vector<int> > C = multiply(A, B);
+    vector<vector<int> > D = matrixMulti(A,B);
    
-//     cout << "\nResultant Matrix C (A * B):" << endl;
-//     printMatrix(C);
-//     cout<<endl;
-//     printMatrix(D);
+    cout << "\nResultant Matrix C (A * B):" << endl;
+    printMatrix(C);
+    cout<<endl;
+    printMatrix(D);
 vector<double> w;
 double start = .3;
 vector<double> b;

@@ -11,6 +11,8 @@
         "span": "cpp",
         "filesystem": "cpp",
         "format": "cpp",
-        "bitset": "cpp"
+        "bitset": "cpp",
+        "iomanip": "cpp",
+        "map": "cpp"
     }
 }

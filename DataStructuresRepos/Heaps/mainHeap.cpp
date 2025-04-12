@@ -3,7 +3,9 @@
 #include "MinHeap.h"
 // #include "MinHeapP.h"
 
+#include "MaxHeapP.h"
 #include "PrioirityQueue.cpp"
+
 using namespace std;
 int capacity  = 8;
 void printArray(int arr[], int len){
@@ -19,12 +21,14 @@ void buildHeap(int arr[], int len){
   {
     h.insert(arr[i]);
   }
-  for(int i = 1;i < len;i++){
+  for(int i = 1;i < len;i++)
+  {
     arr[i] = h.arr[i];
   }
 }
 void heapify(int arr[],int range,int index = 1){
-  if((index * 2) + 1 < range){
+  if((index * 2) + 1 < range)
+  {
     if(arr[index * 2] < arr[(index * 2) + 1]){
       if(arr[index] < arr[(index * 2) + 1]){
         swap(arr[index],arr[(index * 2) + 1]);
@@ -51,24 +55,25 @@ void heapSort(int arr[], int len){
   if(arr[1] > arr[2]){
     swap(arr[1],arr[2]);
   }
-  
 }
 int main() 
 {    
   PQueue p;
   int arr[7] = {4,3,8,2,5,7,6};
-  // MaxHeap h(arr,7,8);
+ 
+  
+  
+  string meep[7] = {"Barry","Iris","Zoom","Wally","Eobard","Goku","Vegeta"};
+  for(int i = 0;i < 7;i++)
+  {
+    p.Enqueue(arr[i],meep[i]);
+  } 
+  p.Dequeue();
+  p.Dequeue();
+   // MaxHeap h(arr,7,8);
   // h.printHeapLin();
   // cout<<endl<<endl;
   // h.printHeap();
-  
-  
-  string meep[5] = {"Barry","Iris","Zoom","Wally","Eobard"};
-  for(int i = 0;i < 5;i++){
-    p.Enqueue(arr[i],meep[i]);
-  }
-  p.Dequeue();
-  p.Dequeue();
   // MinHeapP h(arr,7,8);
   // h.DeleteMin();
   // h.printHeap();

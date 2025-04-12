@@ -1,15 +1,30 @@
+#pragma once
+
+
 #include <iostream>
 #include <math.h>
 using namespace std;
 
 class MaxHeapP
 {
-  public:
+  private:
+    friend class PQueue;
     int *arr;
     int size;
     int capacity;
     int start;
-    
+
+  public:
+    MaxHeapP(int cap)
+    {
+      start = 1;
+      size = 1;
+      capacity = cap;
+      arr = new int[cap];
+      for(int i = 0;i < cap;i++){
+        arr[i] = 0;
+      }
+    }
     bool IsEmpty()
     {
       return size == 1;
@@ -18,13 +33,7 @@ class MaxHeapP
     {  
       return ( size == capacity ) ;
     }
-    MaxHeapP(int cap)
-    {
-      start = 1;
-      size = 1;
-      capacity = cap;
-      arr = new int[cap];
-    }
+    
     int* getArray()
     {
       return arr;
@@ -32,10 +41,10 @@ class MaxHeapP
     void PercolateUp(int last_index)
     {
       if(arr[last_index] > arr[last_index/2] && last_index != 1)
-      {
-        swap(arr[last_index],arr[last_index/2]);
-        last_index/=2;
-        PercolateUp(last_index);
+      {      
+          swap(arr[last_index],arr[last_index/2]);
+          last_index/=2;
+          PercolateUp(last_index);
       }
     }
 void setSize(){
@@ -60,43 +69,28 @@ void setSize(){
       
       
     }
-void PercolateDown(int start_index)
+void PercolateDown(int index,int range)
 // use “compare-and-replace” approach
 {
-  int i = start_index;
-  bool done = false;
-  while(!done && i*2 < capacity){
-    if(arr[i*2] == 0)
-    {
-      done = true;
-    }
-    else if(arr[(i*2)+1] == 0){
-        done = true;
+  if((index * 2) + 1 < range)
+  {
+    if(arr[index * 2] < arr[(index * 2) + 1]){
+      if(arr[index] < arr[(index * 2) + 1]){
+        swap(arr[index],arr[(index * 2) + 1]);
+        index = index * 2;
+        index++;
+        PercolateDown(index,range);
       }
-    else if(arr[i] < arr[i*2] && arr[i] < arr[(i*2)+1])
-    {
-
-      if(arr[(i*2)+1] < arr[i*2]){
-        int temp = arr[i];
-        arr[i] = arr[i*2];
-        arr[i*2] = temp;
-        i = i*2;
-      }
-      else
-      {
-        int temp = arr[i];
-        arr[i] = arr[(i*2)+1];
-        arr[(i*2)+1] = temp;
-        i = (i*2)+1;
-      }
-
     }
     else{
-      done = true;
+      if(arr[index] < arr[index * 2]){
+        swap(arr[index],arr[(index * 2)]);
+        index = index * 2;
+        PercolateDown(index,range);
+      }
     }
   }
-
-}
+  }
     int linear_search(int key)
     {
       for (int i = 0; i < size; i++){
@@ -113,19 +107,17 @@ void PercolateDown(int start_index)
     {
       return ceil(log2(size + 1));
     }
-    void DeleteMax(int maximal_value)
+    void DeleteMax()
     {
       if (!IsEmpty())
        {  
-        maximal_value = arr[1] ;
-        arr[ 1 ] = arr[ size ];
-        arr[ size ] = 0;
-        PercolateDown(1);
-       } 
-      setSize();
+        swap(arr[1],arr[size-1]);
+        size--;
+        PercolateDown(1,size);
+       }
     }
   void printHeapLin(){
-    for(int i = 1; i < size+1; i++){
+    for(int i = 1; i < size; i++){
       cout<<arr[i]<<" ";
     }
   }

@@ -7,10 +7,12 @@ using namespace std;
 
 
 class PQueue{
-  public:
+  private:
+    friend class MaxHeapP;
     MaxHeapP h;
     map<int, string> people;
     int index;
+  public:
     PQueue() : h(8){
         index = 1;
     }
@@ -22,25 +24,26 @@ class PQueue{
     }
     void Enqueue(int priority, string name){
       if(people.find(priority) == people.end()){
-        
         h.insert(priority);
         people[priority] = name;
         cout<<people[h.getArray()[1]]<<" is in the front of the line."<<endl;
         cout<<" - "<<name<<"("<<priority<<") has been added to the list"<<endl;
-    
       }
-      else{
+      else
+      {
         cout<<"Priority is already listed"<<endl;
       }
+    }
+    void print()  {
+      h.printHeapLin();
     }
     void Dequeue(){
         string meep = people[h.arr[1]];
         cout<<meep<<" has just left the line."<<endl;
-
-        h.DeleteMax(1);
-        index++;
-        // string gord = people[h.arr[index]];
-        // cout<<gord<<" is now in the front of the line."<<endl;
+        people.erase(h.arr[1]);
+        h.DeleteMax();
+        string gord = people[h.arr[index]];
+        cout<<gord<<" is now in the front of the line."<<endl;
     }
 
 };

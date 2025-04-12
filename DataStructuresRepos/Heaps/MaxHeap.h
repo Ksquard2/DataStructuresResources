@@ -9,25 +9,12 @@ class MaxHeap
     int size;
     int capacity;
     int start;
-    
-    bool IsEmpty()
-    {
-      return size == 1;
-    }
-    bool IsFull()
-    {  
-      return ( size == capacity ) ;
-    }
     MaxHeap(int cap)
     {
       start = 1;
       size = 1;
       capacity = cap;
       arr = new int[cap];
-    }
-    int* getArray()
-    {
-      return arr;
     }
     void PercolateUp(int last_index)
     {
@@ -38,6 +25,26 @@ class MaxHeap
         PercolateUp(last_index);
       }
     }
+    void insert(int x)
+    {
+        if(arr[1] == 0){
+          arr[1] = x;
+
+        }
+        else{
+          arr[size] = x;
+          PercolateUp(size);
+        }
+        size++;  
+    }
+    bool IsEmpty()
+    {
+      return size == 1;
+    }
+    bool IsFull()
+    {  
+      return ( size == capacity ) ;
+    }
 void setSize(){
   int i = capacity-1;
   while(arr[i] == 0)
@@ -46,20 +53,11 @@ void setSize(){
   }
   size = i;
 }
-    void insert(int x)
-    {
-        if(arr[1] == 0){
-          arr[1] = x;
-
-        }
-        else{
-          this->getArray()[size] = x;
-          PercolateUp(size);
-        }
-        size++;
-      
-      
-    }
+int* getArray()
+{
+  return arr;
+}
+    
     MaxHeap(int array[],int len, int cap)
     {
       arr = new int[cap];

@@ -13,7 +13,6 @@ def e(po):
 # Sigmoid function
 def sigmoid(x):
     return 1.0 / (1.0 + e(x * -1.0))
-from typing import List
 
 def vector_mult(matrix1, matrix2, start, bias):
     total = 0.0
@@ -45,9 +44,8 @@ def forward_prop2(input_vec, weights, bias, col=1):
         hr = len(weights) // (len(input_vec) * 2)
     
     last = len(input_vec) * hr
-    
     hidden = []
-    done = len(input_vec)
+    done = hr
     cont = len(input_vec)
     # Index for bias vector
     bindex = 0
@@ -94,3 +92,6 @@ forward_prop(start,weights2,bias2)
 
 # Quadratic network
 forward_prop2(input_vec, weights1, bias)
+
+
+
