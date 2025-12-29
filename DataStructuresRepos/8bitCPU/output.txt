@@ -1,0 +1,57 @@
+CPU
+Registers: 0x12e704080: 6, 0x12e704081: 10, 0x12e704082: 1, 0x12e704083: 9, 0x12e704084: 2, 0x12e704085: 3, 0x12e704086: 0, 0x12e704087: 8
+Program Counter: 0
+CPU
+Registers: 0x12e704080: 3, 0x12e704081: 10, 0x12e704082: 1, 0x12e704083: 9, 0x12e704084: 2, 0x12e704085: 3, 0x12e704086: 0, 0x12e704087: 8
+Program Counter: 1
+Instruction
+Binary: 10 000 011
+Opcode: MOV Register A: 0 Immediate: 3
+CPU
+Registers: 0x12e704080: 13, 0x12e704081: 10, 0x12e704082: 1, 0x12e704083: 9, 0x12e704084: 2, 0x12e704085: 3, 0x12e704086: 0, 0x12e704087: 8
+Program Counter: 2
+Instruction
+Binary: 00 000 001
+Opcode: ADD Register A: 0 Register B: 1
+CPU
+Registers: 0x12e704080: 13, 0x12e704081: 10, 0x12e704082: 4, 0x12e704083: 9, 0x12e704084: 2, 0x12e704085: 3, 0x12e704086: 0, 0x12e704087: 8
+Program Counter: 3
+Instruction
+Binary: 00 010 101
+Opcode: ADD Register A: 2 Register B: 5
+CPU
+Registers: 0x12e704080: 8, 0x12e704081: 10, 0x12e704082: 4, 0x12e704083: 9, 0x12e704084: 2, 0x12e704085: 3, 0x12e704086: 0, 0x12e704087: 8
+Program Counter: 4
+Instruction
+Binary: 01 000 001
+Opcode: AND Register A: 0 Register B: 1
+CPU
+Registers: 0x12e704080: 8, 0x12e704081: 10, 0x12e704082: 4, 0x12e704083: 0, 0x12e704084: 2, 0x12e704085: 3, 0x12e704086: 0, 0x12e704087: 8
+Program Counter: 5
+Instruction
+Binary: 01 011 100
+Opcode: AND Register A: 3 Register B: 4
+CPU
+Registers: 0x12e704080: 0, 0x12e704081: 10, 0x12e704082: 4, 0x12e704083: 0, 0x12e704084: 2, 0x12e704085: 3, 0x12e704086: 0, 0x12e704087: 8
+Program Counter: 6
+Instruction
+Binary: 10 000 000
+Opcode: MOV Register A: 0 Immediate: 0
+CPU
+Registers: 0x12e704080: 0, 0x12e704081: 10, 0x12e704082: 2, 0x12e704083: 0, 0x12e704084: 2, 0x12e704085: 3, 0x12e704086: 0, 0x12e704087: 8
+Program Counter: 7
+Instruction
+Binary: 10 010 010
+Opcode: MOV Register A: 2 Immediate: 2
+CPU
+Registers: 0x12e704080: 0, 0x12e704081: 10, 0x12e704082: 2, 0x12e704083: 0, 0x12e704084: 2, 0x12e704085: 3, 0x12e704086: 0, 0x12e704087: 8
+Program Counter: 8
+Instruction
+Binary: 11 000 001
+Opcode: JMP Immediate: 1
+CPU
+Registers: 0x12e704080: 0, 0x12e704081: 10, 0x12e704082: 2, 0x12e704083: 0, 0x12e704084: 2, 0x12e704085: 3, 0x12e704086: 0, 0x12e704087: 8
+Program Counter: 12
+Instruction
+Binary: 11 010 100
+Opcode: JMP Immediate: 4

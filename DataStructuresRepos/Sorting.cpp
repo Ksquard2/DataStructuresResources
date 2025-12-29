@@ -1,12 +1,21 @@
 #include <iostream>
-#include "/Users/k2/Desktop/DataStructuresResources/DataStructuresRepos/Trees/TreeI.h"
-#include "/Users/k2/Desktop/DataStructuresResources/DataStructuresRepos/Heaps/MaxHeap.h"
 #include <chrono>
 #include <vector>
+#include "/Users/k2/Desktop/DataStructuresResources/DataStructuresRepos/Trees/TreeI.h"
+#include "/Users/k2/Desktop/DataStructuresResources/DataStructuresRepos/Heaps/MaxHeap.h"
 using namespace std;
 struct node{
   int data;
   node* next;
+};
+void print(node* head){
+  if(head->next){
+    cout<<head->data<<", ";
+    print(head->next);
+  }
+  else{
+    cout<<head->data;
+  }
 }
 void print(int arr[], int n) 
 { 
@@ -29,6 +38,7 @@ void printArray(int arr[10])
 }
 //prototypes
 void heapSort(int arr[], int len);
+node* insertionSort(node* head, int val);
 vector<int> treeSort(vector<int>& arr);
 void ObubbleSort(int arr[],int len);
 void NOBubbleSort(int arr[],int len);
@@ -39,45 +49,73 @@ void radixsort(int arr[], int n);
 int binarySearchI(int arr[], int low, int high, int val);
 int binarySearch(int arr[], int low, int high, int val);
 int findRotatedMin(int arr[6],int l, int r);
-void recurrenceRelation(int n,string str = "");
-unsigned long long int recursion(unsigned long long int a, unsigned long long int prev = 1,unsigned long long int curr = 1);
-unsigned long long int recursion2(unsigned long long int fib);
+// void recurrenceRelation(int n,string str = "");
+// unsigned long long int recursion2(unsigned long long int fib);
+unsigned long long int recursion(unsigned long long int a, unsigned long long int prev = 1,unsigned long long int curr = 1)
+{
+  if (a == 1)
+  {
+
+    return curr;
+  }
+  else return recursion(a-1,curr,curr+prev);
+}
+
+unsigned long long int recursion2(unsigned long long int fib) 
+{
+   if (fib <= 1) 
+   {
+      return fib;
+   }
+   else 
+   {
+      return (recursion2(fib-1) + recursion2(fib-2));
+   }
+}
 int main() 
 {
+// node* head = NULL;
+// head =  insertionSort(head,5);
+// head =  insertionSort(head,18);
+// head =  insertionSort(head,1);
+// head =  insertionSort(head,3);
+// head =  insertionSort(head,9);
+// head =  insertionSort(head,2);
+// head =  insertionSort(head,8);
+// print(head);
+    int f;
+  cout<<"Enter number to find the value of its fibonacci index: ";
+  cin>>f;
+  cout<<endl;
 
-  //   int f;
-  // cout<<"Enter number to find the value of its fibonacci index: ";
-  // cin>>f;
-  // cout<<endl;
+  int fib = f;
+  
+  auto starti = chrono::high_resolution_clock::now();
+  
+  cout<<"The recursive 1 algorithm outputs: "<<recursion(fib)<<endl;
 
-  // int fib = f;
+  auto endi = chrono::high_resolution_clock::now();
   
-  // auto starti = chrono::high_resolution_clock::now();
+  cout<<endl;
   
-  // cout<<"The recursive 1 algorithm outputs: "<<recursion(fib)<<endl;
+  double speedi = chrono::duration_cast<chrono::nanoseconds>(endi-starti).count();
+  
+  cout<<(speedi / 1e+9)<<" seconds of performace time for Fibonacci iteration"<<endl;
 
-  // auto endi = chrono::high_resolution_clock::now();
-  
-  // cout<<endl;
-  
-  // double speedi = chrono::duration_cast<chrono::nanoseconds>(endi-starti).count();
-  
-  // cout<<(speedi / 1e+9)<<" seconds of performace time for Fibonacci iteration"<<endl;
+  cout<<endl;
 
-  // cout<<endl;
-
-  // auto startr = chrono::high_resolution_clock::now();
+  auto startr = chrono::high_resolution_clock::now();
   
-  // cout<<"The recursive algorithm outputs: "<<recursion2(fib+1)<<endl;
+  cout<<"The recursive algorithm outputs: "<<recursion2(fib+1)<<endl;
   
-  // auto endr = chrono::high_resolution_clock::now();
+  auto endr = chrono::high_resolution_clock::now();
   
-  // cout<<endl;
+  cout<<endl;
   
-  // double speedr = chrono::duration_cast<chrono::nanoseconds>(endr-startr).count();
+  double speedr = chrono::duration_cast<chrono::nanoseconds>(endr-startr).count();
   
-  // cout<<(speedr / 1e+9)<<" seconds of performace time for Fibonacci recursion"<<endl;
-  recurrenceRelation(8);
+  cout<<(speedr / 1e+9)<<" seconds of performace time for Fibonacci recursion"<<endl;
+  // recurrenceRelation(8);
   // int arr[6] = {3,890,20,46,31,8};
   // mergeSort(arr, 0, 6);
   // for(int i = 0;i < 6;i++){
@@ -164,8 +202,6 @@ vector<int> treeSort(vector<int>& arr){
 }
 void ObubbleSort(int arr[],int len)
 {
-  cout<<"Orignal List: ";
-  printArray(arr);
   int tracker = 0;
   for(int i = 0;i < len;i++)
   {
@@ -180,7 +216,6 @@ void ObubbleSort(int arr[],int len)
             tracker++;
         } 
     }  
-    printArray(arr);
     if(tracker == 0)
     {
       break;
@@ -443,25 +478,4 @@ node* insertionSort(node* head, int val){
       }
   }
   return head;
-}
-unsigned long long int recursion(unsigned long long int a, unsigned long long int prev = 1,unsigned long long int curr = 1)
-{
-  if (a == 1)
-  {
-
-    return curr;
-  }
-  else return recursion(a-1,curr,curr+prev);
-}
-
-unsigned long long int recursion2(unsigned long long int fib) 
-{
-   if (fib <= 1) 
-   {
-      return fib;
-   }
-   else 
-   {
-      return (recursion2(fib-1) + recursion2(fib-2));
-   }
 }

@@ -15,9 +15,11 @@ public:
         arr = new char[MAX_SIZE];
         size = 0;
     }
+    
+
     bool isEmpty() // can make const
     {
-        return !size;
+        return size==0;
     }
     void append(char val) // can throw err if size can't be increased anymore (size is at max int)
     {
@@ -33,6 +35,17 @@ public:
         arr[size] = val;
         size++;
     }
+    void operator+=(char c){
+        append(c);
+    }
+    char operator[](int i){
+        if(i < size){
+            return arr[i];
+        }
+        else{
+            return '\0';
+        }
+    }
     void deleteAt(int index)
     {
         if(!isEmpty()){
@@ -45,12 +58,7 @@ public:
     }
     void erase(int start, int end) // throw err if is empty to ensure illegal process is found
     {
-        if(start >= end || start >= size || end >= size){
-            return;
-        }
-        for(int i = start;i < end;i++){
-            
-        }
+ 
     }
     char elementAt(int index) // can use operator[] for indexing // can make const
     {
@@ -60,7 +68,7 @@ public:
         }
         else
         {
-            return -1;
+            return '\0';
         }
     }
     int length() // can make const
@@ -72,7 +80,6 @@ public:
         if (isEmpty())
         {
             cout << "can't print. vector is empty" << endl;
-            return;
         }
         for (int i = 0; i < size - 1; i++)
         {

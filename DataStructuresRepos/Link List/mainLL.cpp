@@ -236,8 +236,11 @@ void unitTestDeleteVal(){
 
 int main() 
 {
-  unitTestInsertAt();
-  
+
+  int arr[13] = {1,2,3,6,6,6,4,5,6,1,2,5,6};
+  NodeI LL(arr,13);
+  LL.deleteAll(6);
+  LL.prettyPrint();
   
 //   int Length;
 //  cout<<"How Many Polynomials: ";

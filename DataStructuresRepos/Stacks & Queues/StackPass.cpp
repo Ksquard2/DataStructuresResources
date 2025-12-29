@@ -1,117 +1,82 @@
 #include <iostream>
 using namespace std;
 struct node{
-    char data;
+    int data;
     node* next;
 };
+int MAX_SIZE = 10;
 class Register
 {
   private:
-    char queue[10];
+    int queue[10];
     int rear;
     int front;
-    node* BOQ;
-    node* EOQ;
+    node* TOS;
+
   public:
-    Register(){
-        rear,front = 0;
-        BOQ = NULL;
-        EOQ = NULL;
+  Register(){
+    rear = 0;
+    front = 0;
+    TOS = NULL;
+  }
+  bool isFull(){
+    return rear == MAX_SIZE; 
+  }
+  bool isEmpty(){
+    return rear == front;
+  }
+  void pass(int val){
+    if(!isFull()){
+      queue[rear] = val;
+      rear++;
     }
-    bool isQEmpty()
-    {
-      return rear == front;
+    else{
+      node* nn = new node;
+      nn->data = val;
+      nn->next = TOS;
+      TOS = nn;
     }
-    bool isQFull()
-    {
-      return ( front == (rear + 1) % 10 );
-    }
-    int getQSize()
-    {
-      if (rear >= front)
-        return ( rear - front);
-      else
-        return 10 - front + rear;
-    }
-    char pop()
-    {
-      if(this->isQEmpty())
-      {
-        cout<<"Queue is empty"<<endl;
-        return '0';
+  }
+  void pop(){
+    if(!isEmpty()){
+      if(!TOS){
+        front++;
       }
-      else
-      {
-        if(BOQ){
-            for(int i = front;i < 9;i++){
-                swap(queue[i],queue[i+1]);
-            }
-            if(rear != 9){
-                swap(queue[9],queue[0]);
-                for(int i = 0;i < rear-1;i++){
-                    swap(queue[i],queue[i+1]);
-                }
-            }
-            queue[rear] = BOQ->data;
-            BOQ = BOQ->next;
-            return BOQ->data;
-        }
-        else{
-            char temp = queue[front];
-            front = (front+1)%10;
-            return temp;
-        }
-        
-      }
-    }
+      else{
 
-    void pass(int val)
-    {
-      if(this->isQFull())
-      {
-        node* nn = new node; // Allocate memory for a new node
-        nn->data = val;
-        nn->next = NULL; // New node points to NULL
+        for(int i = front;i < rear-1;i++){
 
-        if (!BOQ) {
-            BOQ = nn; // Both BOQ and EOQ point to the new node
-            EOQ = nn;
-        } else {
-            EOQ->next = nn; // Link the new node at the end
-            EOQ = nn; // Update EOQ to the new node
+          swap(queue[i],queue[i+1]);
         }
+        queue[rear-1] = TOS->data;
+        TOS = TOS->next;
       }
-      else
-      {
-        queue[rear] = val;
-        rear++;
-      }
-      
     }
-    
-      
-          
-    void printRegister()
-    {
-      if(isQEmpty())
-      for(int i = front;i < 10 ; i++)
-      {
-        cout<<queue[i]<<endl;
+  }
+  void print(){
+    cout<<"In Register: ";
+    for(int i = front;i < rear;i++){
+      if(i != rear-1){
+        cout<<queue[i]<<", ";
       }
-      if(rear != 9){
-        for(int i = 0; i < rear;i++){
-            cout<<queue[i]<<endl;
-        }
+      else{
+        cout<<queue[i];
       }
-      if(BOQ){
-        node* temp = BOQ;
-        while(temp){
-            cout<<temp->data<<endl;
-            BOQ = BOQ->next;
-        }
-      }
-      
     }
-    
+    cout<<endl;
+    cout<<"In Stack: ";
+    node* temp = TOS;
+    while(temp){
+      if(temp->next){
+        cout<<temp->data<<", ";
+      }
+      else{
+        cout<<temp->data;
+      }
+      temp = temp->next;
+    }
+    cout<<endl;
+
+  }
     
 };

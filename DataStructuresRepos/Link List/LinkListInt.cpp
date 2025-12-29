@@ -221,6 +221,35 @@ int elementAt(int i) //get item
   
 }
 
+void deleteAll(int val){
+  if(head == NULL){//checks if list is empty
+    return;
+  }
+  while(head != NULL&&head->data == val){//checks if val is in th beginning
+    head = head->next;
+  }
+  if(head == NULL){//if list is all just the value
+    return;
+  }
+  Node* curr = head;
+  Node* prev = head;
+  
+  while(curr != NULL){
+    if(curr->data == val){
+      while(curr->next != NULL && curr->next->data == val){//if the value is consecutive
+        curr = curr->next;
+      }
+      prev->next = curr->next;//removes the node or set of nodes that are the value
+      curr->next = NULL;
+      curr = prev->next;
+    }
+    else{
+      prev = curr;//moves forward if we dont find anything
+      curr = curr->next;
+    }
+  }
+}
+
 bool IsIn(int d)
 {
   if(isEmpty())
@@ -284,27 +313,27 @@ void insertList(NodeI s2, int k)
   temp1->next = s2.head;
   prettyPrint();
 }
-void deleteAll(int val)
-{
-  Node* temp = head;
-  Node* prev = NULL;
-  while(temp->data == val){
-    head = temp->next;
-    temp = temp->next;
-  }
-  while(temp != NULL){
-    if(temp->data == val){
-      prev->next = temp->next;
-      temp = temp->next;
-      prev->next = NULL;
-    }
-    else
-    {
-      prev = temp;
-      temp = temp->next;
-    }
-  }
-}
+// void deleteAll(int val)
+// {
+//   Node* temp = head;
+//   Node* prev = NULL;
+//   while(temp->data == val){
+//     head = temp->next;
+//     temp = temp->next;
+//   }
+//   while(temp != NULL){
+//     if(temp->data == val){
+//       prev->next = temp->next;
+//       temp = temp->next;
+//       prev->next = NULL;
+//     }
+//     else
+//     {
+//       prev = temp;
+//       temp = temp->next;
+//     }
+//   }
+// }
 NodeI reverseList(){
 
     Node* curr = head;

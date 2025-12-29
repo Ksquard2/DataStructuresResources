@@ -5,18 +5,13 @@ using namespace std;
 
 int main(){
     myString vec;
-    for(int i = 0;i < 5;i++){
-        int random_number = rand() % 25 + 1; 
-        char rand = 'A'+random_number;
-        vec.pushBack(rand);
+    for(int i = 0;i < 20;i++){
+        char random_char = 'A' + rand() % 26; 
+        vec+=random_char;
     }
-    vec.print();
-    cout<<vec.elementAt(3)<<endl;
-    vec.popBack();
-    vec.popBack();
-    vec.popBack();
-    vec.popBack();
-    vec.popBack();
-    vec.popBack();
-    vec.print();
+    for(int i = 0;i < 20;i++){
+        cout<<vec[i];
+    }
 }
+
+

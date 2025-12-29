@@ -1,13 +1,14 @@
 #include <iostream>
 #include "Stack.cpp"
-#include "Queue.cpp"
+// #include "Queue.cpp"
 #include "StackFS.cpp"
 #include "StackF.cpp"
 #include "DLLQueues.cpp"
 #include "SLLQueues.cpp"
 #include "SLLQueueStr.cpp"
-#include "StackPass.cpp"
+// #include "StackPass.cpp"
 #include "BadQueue.h"
+#include "Queue.cpp"
 #include <string>
 #include <fstream>
 #include <cmath>
@@ -147,22 +148,34 @@ void SearchBar(){
 
 int main() 
 {
-  BadQueue p;
-  int arr[7] = {4,3,8,2,5,7,6};
- 
-  
-  
-  string meep[7] = {"Barry","Iris","Zoom","Wally","Eobard","Goku","Vegeta"};
-  for(int i = 0;i < 7;i++)
-  {
-    p.enqueue(meep[i],arr[i]);
-  } 
-  p.deque();
-  p.deque();
-  // for(int i = 0;i < 20;i++){
-  //   char random_char = 'a'+ rand() % 26; 
-  //   r.pass(random_char);
-  // }
+  Queue q;
+
+    cout << "Enqueuing 10 elements..." << endl;
+    for (int i = 1; i <= 10; i++) {
+        q.enqueue(i);
+    }
+
+    cout << "Trying to enqueue one more (should be full):" << endl;
+    q.enqueue(11);
+    
+    cout << "\nDequeuing 5 elements..." << endl;
+    for (int i = 0; i < 5; i++) {
+        cout << "Dequeued: " << q.deque() << endl;
+    }
+
+    cout << "\nEnqueuing 3 more (should wrap around):" << endl;
+    for (int i = 100; i < 103; i++) {
+        q.enqueue(i);
+    }
+      q.displayQueue();
+    cout << "\nDequeuing remaining elements..." << endl;
+    while (!q.isQEmpty()) {
+        cout << "Dequeued: " << q.deque() << endl;
+    }
+
+    cout << "\nTrying to dequeue from empty queue:" << endl;
+    q.deque();
+
 //  r.printRegister();
 //   int x =10;
 // int arr[5]= {1,2,3,4,5};

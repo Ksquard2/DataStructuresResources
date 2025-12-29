@@ -14,48 +14,7 @@ void printArray(int arr[], int len){
   }
   cout<<endl;
 }
-void buildHeap(int arr[], int len){
 
-  MaxHeap h(8);
-  for (int i = 1;i < len; i++)
-  {
-    h.insert(arr[i]);
-  }
-  for(int i = 1;i < len;i++)
-  {
-    arr[i] = h.arr[i];
-  }
-}
-void heapify(int arr[],int range,int index = 1){
-  if((index * 2) + 1 < range)
-  {
-    if(arr[index * 2] < arr[(index * 2) + 1]){
-      if(arr[index] < arr[(index * 2) + 1]){
-        swap(arr[index],arr[(index * 2) + 1]);
-        index = index * 2;
-        index++;
-        heapify(arr,range,index);
-      }
-    }
-    else{
-      if(arr[index] < arr[index * 2]){
-        swap(arr[index],arr[(index * 2)]);
-        index = index * 2;
-        heapify(arr,range,index);
-      }
-    }
-  }
-}
-void heapSort(int arr[], int len){
-  buildHeap(arr,len);
-  for(int i = len-1;i > 0;i--){
-    swap(arr[1],arr[i]);
-    heapify(arr,i);
-  }
-  if(arr[1] > arr[2]){
-    swap(arr[1],arr[2]);
-  }
-}
 int main() 
 {    
   PQueue p;

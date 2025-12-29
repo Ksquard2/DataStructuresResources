@@ -1,0 +1,282 @@
+body 
+{
+    background-color:#127a14;
+    text-align: center;
+    padding-bottom: 50px;
+}
+
+a
+{
+    font-size: large;
+    color: white;
+}
+
+h2
+{
+    font-size: 25px;
+    padding-top: 16px;
+}
+
+h3
+{
+    font-size: 20px;
+    padding-top: 16px;
+}
+
+#outerColor
+{
+    background-color: #258526;
+    margin: 0 auto;
+    width: 1200px;
+    padding-bottom: 50px;
+}
+
+#innerColor
+{
+    background-color: rgb(39, 29, 8);
+    margin: 0 auto;
+    width: 1100px;
+    padding-top: 50px;
+    padding-bottom: 50px;
+}
+
+
+#listItem
+{
+    font-size: 30px;
+    font-family: Cambria, Cochin, Georgia, Times, 'Times New Roman', serif;
+    color: white;
+}
+
+#text
+{
+    padding: 5px;
+    border-radius: 2%;
+}
+
+p
+{
+    background-color: rgb(233, 212, 163);
+    margin: 0 auto;
+    width: 1000px;
+    border-radius: 20;
+    
+    text-indent: 40px;
+    text-align: center;
+    font-family: 'Times New Roman', Times, serif;
+    font-size: 20px;
+}
+
+.stage
+{
+    /* Base state */
+    padding: 10px;
+    transform: translateX(0);
+    transition: transform 2s ease;
+}
+
+.stage.active
+{
+    /* Playing state */
+    transform: translateX(-100px);
+}
+
+.stage p
+{
+    font-family: 'Courier New', Courier, monospace;
+}
+
+#image
+{
+    padding: 10px;
+}
+
+#image .img
+{
+    margin: 0 auto;
+    background-color:  rgb(39, 29, 8);  
+    width: 600px;
+    height: 350px;
+    overflow: hidden;
+}
+
+.image
+{
+    /* Alignment */
+    margin: 0 auto;
+    background-color: black;
+
+    
+    /* Sizing */
+    width: 200px;
+    height: 200px;
+    transform: scale(1);
+    position: relative;
+    z-index: 2;
+
+    /* Shaping */
+    overflow: visible;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    border-radius: 50%;
+}
+
+.image img
+{
+    /* Placing the image in the box correctly */
+    width: 110%;
+    object-fit: contain;
+    transform: scale(1) translateY(0) translateX(-12px);
+    transition: transform 0.3s ease;
+}
+
+.tooltip
+{
+    position: absolute;
+
+    left: 50%;
+    top: -20px;
+
+    width: max-content;
+    padding: 6px 10px;
+
+    background: white;
+    color: #222;
+    font-size: 16px;
+    border-radius: 6px;
+
+    opacity: 0;
+    pointer-events: none;
+    transform: translateX(-50%) translateY(220px) scale(0.8);
+    transform-origin: top center;
+    transition: opacity 0.2s ease, transform 0.2s ease;
+}
+
+.image:hover .tooltip
+{
+    opacity: 1;
+    transform: translateX(-50%) translateY(220px) scale(1);
+}
+
+.image:hover img 
+{
+    /* This handles the hovers logic of expanding */
+    transform: scale(1.2) translateY(15px) translateX(-12px);
+}
+
+
+@keyframes spinning
+{
+    /* Animation to spin the image */
+    from { transform: rotate(0deg); }
+    to { transform: rotate(360deg); }
+}
+
+.rotator
+{
+    /* Force the size of the image and rotate it if clicked */
+    width: 100%;
+    height: 100%;
+    border-radius: 50%;
+    overflow: hidden;
+    animation: spinning 3s linear infinite;
+    animation-play-state: paused;
+}
+
+.panel
+{
+    /* Positioning */
+    position: absolute;
+    top: 0;
+    right: 250px;
+    z-index: 1;
+    
+    /* Shape and Format */
+    text-align: right;
+    width: 250px;
+    height: 60%;
+    background-color: white;
+    color: #222;
+    padding: 10px;
+    margin-left: 190px;
+    border-radius: 2%;
+
+    /* Base state */
+    transform: scaleX(0) translateY(25px);
+    transform-origin: left;
+    opacity: 0;
+
+    transition: transform 0.5s ease, opacity 0.5s ease;
+}
+
+
+.stage.active .panel
+{
+    /* Playing state */
+    transform: scaleX(1) translateY(25px);
+    opacity: 1;
+}
+
+.bubblePos
+{
+    position: fixed;
+    left: -10px; 
+    top: 50%;
+    transform: translateY(-50%) translateX(0px);
+    transition: transform 0.5s ease;
+}
+
+.bubblePos.active
+{
+    transform: translateY(-50%) translateX(220px);
+}
+
+.bubble img
+{
+    width: 35px;
+    height: 35px;
+
+    transform: scale(1.4) translateX(1px);
+}
+
+.bubble
+{
+    background-color: black;
+    
+    width: 35px;
+    height: 35px;
+    border-radius: 50%;
+    
+    display: flex;
+    transition: transform 0.1s ease;
+}
+
+.bubble:hover
+{
+    transform: translateX(0px) scale(1.4);
+}
+
+
+.navBar
+{
+    position: fixed;
+    top: 50%;
+    left: 0;
+
+    width: 200px;
+    height: auto;
+    border-radius: 2%;
+    
+    padding: 10px;
+    background-color: black;
+    color: white;
+    
+    transform: translate(-100%, -50%);
+    transition: transform 0.5s ease;
+}
+
+.navBar.active
+{
+    transform: translate(0, -50%); /* slide in */
+}

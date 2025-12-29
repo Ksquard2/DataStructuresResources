@@ -13,6 +13,9 @@
         "format": "cpp",
         "bitset": "cpp",
         "iomanip": "cpp",
-        "map": "cpp"
+        "map": "cpp",
+        "__split_buffer": "cpp",
+        "deque": "cpp",
+        "istream": "cpp"
     }
 }

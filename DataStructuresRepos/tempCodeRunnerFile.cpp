@@ -1,4 +1,3 @@
-    if (n == 2) {
-        C = matrixMulti(A,B);
-        return C;
-    }
+    int wins[7] = { 0, 0, 0, 0, 0, 0, 0 };
+    int loss[7] = { 0, 0, 0, 0, 0, 0, 0 };
+    int draw[7] = { 0, 0, 0, 0, 0, 0, 0 };

@@ -91,6 +91,15 @@ void PercolateDown(int index,int range)
     }
   }
   }
+  void DeleteMax()
+    {
+      if (!IsEmpty())
+       {  
+        swap(arr[1],arr[size-1]);
+        size--;
+        PercolateDown(1,size);
+       }
+    }
     int linear_search(int key)
     {
       for (int i = 0; i < size; i++){
@@ -103,19 +112,12 @@ void PercolateDown(int index,int range)
       cout<<"Value not Found"<<endl;
       return -1;
     }
+    
     int height()
     {
       return ceil(log2(size + 1));
     }
-    void DeleteMax()
-    {
-      if (!IsEmpty())
-       {  
-        swap(arr[1],arr[size-1]);
-        size--;
-        PercolateDown(1,size);
-       }
-    }
+    
   void printHeapLin(){
     for(int i = 1; i < size; i++){
       cout<<arr[i]<<" ";

@@ -180,21 +180,8 @@ int main()
     // return 0;
   
   
-  vector<int> arr;
-  for(int i = 0;i < 7;i++){
-    int random_number = rand() % 90 + 1; 
-    arr.push_back(random_number);
-}
-  for(int i = 0;i < 6;i++){
-    cout<<arr[i]<<", ";
-  }
-  cout<<arr[6]<<endl;
-  arr = treeSort(arr);
-
-  for(int i = 0;i < 6;i++){
-    cout<<arr[i]<<", ";
-  }
-  cout<<arr[6]<<endl;
+  // char arr[5];
+  // char *arr = new char[5];
   // treeSort(arr);
   // TreeI* clone = new TreeI;
   // cloneTree(tree1,clone);
@@ -220,17 +207,17 @@ int main()
   //   cout<<"false";
   // }
   
-//   TreeA root(5);
-//   root.insertA(2);
-//   root.insertA(1);
-//   root.insertA(3);
-//   root.insertA(8);
-//   root.insertA(6);
-//   root.insertA(9);
-//   root.insertA(4);
-
-//   cout<<root.height()<<endl;
-//   root.printTreeA();
+  TreeA root(5);
+  root.insertA(2);
+  root.insertA(1);
+  root.insertA(3);
+  root.insertA(7);
+  root.insertA(6);
+  root.insertA(8);
+  root.insertA(9);
+  root.printTreeA();
+  cout<<endl;
+  root.preOrder();
   // cout<<endl;
   // orderIn(tree2);
   // cout<<endl;

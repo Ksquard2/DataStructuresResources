@@ -57,11 +57,8 @@ void prettyPrint(TreeI* tree, int depth = 0)
     cout << string(depth * 2, ' ');
     cout << tree->data << endl;
     prettyPrint(tree->left, depth + 1);
-
   }
-
 }
-
 
 void arrToTree(TreeI* tree, int arr[], int len)
 {
@@ -368,32 +365,7 @@ TreeI* InsertAVL(TreeI* root, int value) {
   return Balance(root);         // Balance the node if needed
 }
 
-TreeI* vecToTree(vector<int>& arr){
-  TreeI* tree = nullptr;
-  for(int i = 0; i < arr.size(); i++)
-  {
-    tree = InsertAVL(tree, arr[i]);
-  }
-  return tree;
-}
 
-void inOrderV(vector<int>& meep, TreeI* root){
-  if(root == NULL){
-      return;
-  }
-  else{
-    inOrderV(meep,root -> left);
-    meep.push_back(root -> data); 
-    inOrderV(meep, root -> right);
-       
-  }
-}
-vector<int> treeSort(vector<int>& arr){
-  TreeI* root = vecToTree(arr);
-  vector<int> answer;
-  inOrderV(answer, root);
-  return answer;
-}
 void cloneTree(TreeI* OG, TreeI*& clone) {
     if (!OG) {
         clone = nullptr;

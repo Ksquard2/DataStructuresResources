@@ -1,0 +1,24 @@
+<!DOCTYPE html>
+<html>
+<body>
+
+<script src="index.js"></script>
+
+<script>
+    async function testLyrics() {
+        console.log("testLyrics started");
+
+        try {
+            const lyrics = await getLyrics("Unison Square Garden", "Boujaku no charisma");
+            console.log("Lyrics returned:");
+            console.log(lyrics);
+        } catch (e) {
+            console.error("Error:", e.message);
+        }
+    }
+
+    testLyrics();
+</script>
+
+</body>
+</html>

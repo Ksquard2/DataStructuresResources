@@ -81,7 +81,6 @@ bool isBST(int i = 1){
   if(arr[i] == 0){
     return true;
   }
-
   else if(arr[i*2] == 0 && arr[(i*2)+1] == 0){
     return true;
   }
@@ -102,21 +101,15 @@ bool isBST(int i = 1){
     return false;
   }
 }
-void preOrder(int i = 1)
-{
-  if(arr[i] == 0){
-    cout<<". ";
-  }
-  else if(i > size)
-  {
-    cout<<"";
-  }
-  else{
-    cout<<arr[i]<<" ";
-    preOrder(i*2);
-    preOrder((i*2)+1);
-  }
-}
+
+
+
+
+
+
+
+
+
 void postOrder(int i = 1)
 {
   
@@ -164,6 +157,22 @@ int height()
     return log2(i+1)+1;
   }
   else return log2(i+1);
+}
+
+void preOrder(int index = 1){
+  if(index > size){
+    cout<<". ";
+  }
+  else if(arr[index] == 0){
+    cout<<". ";
+  }
+  else{
+    cout<<arr[index]<<" ";
+    index*=2;
+    preOrder(index);
+    index++;
+    preOrder(index);
+  }
 }
 
 void printTreeA(){
@@ -215,6 +224,7 @@ void printTreeA(){
       }
     indent++;
     }
+    cout<<endl;
 }
 
 };

@@ -1,6 +1,6 @@
 #include <iostream>
 using namespace std;
-const int MAX_SIZE = 30;
+const int MAX_SIZE = 10;
   
 class Queue
 {
@@ -9,20 +9,16 @@ class Queue
     int rear = 0;
     int front = 0;
   public:
+    int size(){
+      return rear-front;
+    }
     bool isQEmpty()
     {
-      return rear == front;
+      return size() == 0;
     }
     bool isQFull()
     {
-      return ( front == (rear + 1) % 30 );
-    }
-    int getQSize()
-    {
-      if (rear >= front)
-        return ( rear - front);
-      else
-        return 30 - front + rear;
+      return size() == MAX_SIZE;
     }
     int deque()
     {
@@ -33,8 +29,8 @@ class Queue
       }
       else
       {
-        int temp = queue[front];
-        front = (front+1)%30;
+        int temp = queue[front%MAX_SIZE];
+        front = (front+1);
         return temp;
       }
     }
@@ -47,21 +43,36 @@ class Queue
       }
       else
       {
-        queue[rear] = val;
+        queue[rear%MAX_SIZE] = val;
         rear++;
       }
       
     }
-    
-      
-          
-    void printQueue()
-    {
-      for(int i = front;i < rear; i++)
-      {
-        cout<<queue[i]<<endl;
+    void displayQueue(){
+      if(!isQEmpty()){
+        if(front%MAX_SIZE < rear% MAX_SIZE){
+          for(int i = (front%MAX_SIZE);i < (rear%MAX_SIZE);i++){
+            cout<<queue[i]<<" ";
+          }
+        }
+        else{
+          cout<<"hello"<<endl;
+          for(int i = front%MAX_SIZE;i < MAX_SIZE;i++){
+            cout<<queue[i]<<" ";
+          }
+          for(int i = 0;i < (rear%MAX_SIZE);i++){
+            cout<<queue[i]<<" ";
+          }
+        
+        }
+        cout<<endl;
+      }
+      else{
+        cout<<"Queue is empty";
       }
     }
+    
+    
     
     
 };

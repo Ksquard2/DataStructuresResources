@@ -24,11 +24,16 @@ class DHash{
         }
         void insertHelper(int x, int index,int coll = 0){
             if(map[index] == -1){
-            map[index] = x;
+                cout<<"Collisions("<<x<<"): "<<coll<<endl;
+                map[index] = x;
             }
-            else if(coll <= 30){
+            else if(coll <= 30)
+            {
                 coll++;
                 index = (x%10 + coll*(hashVar-(x%hashVar)))%10;
+                
+                // index = (x + coll*(hashVar-(x%hashVar)))%10;
+
                 insertHelper(x,index,coll);
             }
             else{
@@ -39,6 +44,4 @@ class DHash{
             insertHelper(x,x%10);
             printHash();
         }
-        
-
 };
